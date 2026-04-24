@@ -7,7 +7,7 @@ on:
     branches: [develop]
 
 jobs:
-  tests:
+  validate:
     runs-on: ubuntu-latest
     name: Validate App
     steps:
@@ -20,3 +20,21 @@ jobs:
       - name: Compile Python
         run: |
           python -m compileall erpnext_srilankan_localisation
+
+  semgrep:
+    runs-on: ubuntu-latest
+    name: Semgrep Scan
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Clone Semgrep rules
+        run: |
+          git clone https://github.com/frappe/semgrep-rules.git
+
+      - name: Install Semgrep
+        run: |
+          pip install semgrep
+
+      - name: Run Semgrep
+        run: |
+          semgrep scan --config semgrep-rules/rules .
