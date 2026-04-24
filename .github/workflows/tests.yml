@@ -1,0 +1,22 @@
+name: tests
+
+on:
+  pull_request:
+    branches: [develop]
+  push:
+    branches: [develop]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    name: Validate App
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate JSON
+        run: |
+          python -m json.tool erpnext_srilankan_localisation/fixtures/chart_of_accounts/lk_standard_chart_of_accounts.json
+
+      - name: Compile Python
+        run: |
+          python -m compileall erpnext_srilankan_localisation

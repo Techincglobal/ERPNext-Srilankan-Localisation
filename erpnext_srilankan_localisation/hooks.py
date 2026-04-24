@@ -86,12 +86,13 @@ app_license = "mit"
 # ------------
 
 # before_install = "erpnext_srilankan_localisation.install.before_install"
-# after_install = "erpnext_srilankan_localisation.install.after_install"
+after_install = "erpnext_srilankan_localisation.install.after_install"
+after_migrate = "erpnext_srilankan_localisation.setup.after_migrate"
 
 # Uninstallation
 # ------------
 
-# before_uninstall = "erpnext_srilankan_localisation.uninstall.before_uninstall"
+before_uninstall = "erpnext_srilankan_localisation.uninstall.before_uninstall"
 # after_uninstall = "erpnext_srilankan_localisation.uninstall.after_uninstall"
 
 # Integration Setup

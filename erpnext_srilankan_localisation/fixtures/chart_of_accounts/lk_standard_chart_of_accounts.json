@@ -1,0 +1,644 @@
+{
+  "country_code": "lk",
+  "name": "Sri Lanka - Standard Chart of Accounts",
+  "tree": {
+    "Application of Funds (Assets)": {
+      "account_number": "1-000000",
+      "is_group": 1,
+      "root_type": "Asset",
+      "Non Current Assets": {
+        "account_number": "1-100000",
+        "is_group": 1,
+        "Fixed Assets": {
+          "account_number": "1-110000",
+          "is_group": 1,
+          "Land": {
+            "account_number": "1-110100",
+            "is_group": 1,
+            "account_type": "Fixed Asset",
+            "Land": {
+              "account_number": "1-110101",
+              "account_type": "Fixed Asset"
+            }
+          },
+          "Buildings": {
+            "account_number": "1-110200",
+            "is_group": 1,
+            "account_type": "Fixed Asset",
+            "Buildings": {
+              "account_number": "1-110201",
+              "account_type": "Fixed Asset"
+            }
+          },
+          "Motor Vehicles": {
+            "account_number": "1-110300",
+            "is_group": 1,
+            "account_type": "Fixed Asset",
+            "Motor Vehicles": {
+              "account_number": "1-110301",
+              "account_type": "Fixed Asset"
+            }
+          },
+          "Furniture & Fittings": {
+            "account_number": "1-110400",
+            "is_group": 1,
+            "account_type": "Fixed Asset",
+            "Furniture & Fittings": {
+              "account_number": "1-110401",
+              "account_type": "Fixed Asset"
+            }
+          },
+          "Computer & Equipment": {
+            "account_number": "1-110500",
+            "is_group": 1,
+            "account_type": "Fixed Asset",
+            "Computer & Equipment": {
+              "account_number": "1-110501",
+              "account_type": "Fixed Asset"
+            }
+          },
+          "Office Equipment": {
+            "account_number": "1-110600",
+            "is_group": 1,
+            "account_type": "Fixed Asset",
+            "Office Equipment": {
+              "account_number": "1-110601",
+              "account_type": "Fixed Asset"
+            }
+          },
+          "Plant & Machinery": {
+            "account_number": "1-110700",
+            "is_group": 1,
+            "account_type": "Fixed Asset",
+            "Plant & Machinery": {
+              "account_number": "1-110701",
+              "account_type": "Fixed Asset"
+            }
+          },
+          "Accumulated Depreciation": {
+            "account_number": "1-112000",
+            "is_group": 1,
+            "account_type": "Accumulated Depreciation",
+            "Accumulated Depreciation - Buildings": {
+              "account_number": "1-112001",
+              "account_type": "Accumulated Depreciation"
+            },
+            "Accumulated Depreciation - Motor Vehicles": {
+              "account_number": "1-112002",
+              "account_type": "Accumulated Depreciation"
+            },
+            "Accumulated Depreciation - Furniture & Fittings": {
+              "account_number": "1-112003",
+              "account_type": "Accumulated Depreciation"
+            },
+            "Accumulated Depreciation - Computer & Equipment": {
+              "account_number": "1-112004",
+              "account_type": "Accumulated Depreciation"
+            },
+            "Accumulated Depreciation - Office Equipment": {
+              "account_number": "1-112005",
+              "account_type": "Accumulated Depreciation"
+            },
+            "Accumulated Depreciation - Plant & Machinery": {
+              "account_number": "1-112006",
+              "account_type": "Accumulated Depreciation"
+            }
+          }
+        },
+        "Capital Work in Progress": {
+          "account_number": "1-120000",
+          "is_group": 1,
+          "Capital Work in Progress": {
+            "account_number": "1-120001",
+            "account_type": "Capital Work in Progress"
+          }
+        },
+        "Intangible Assets": {
+          "account_number": "1-130000",
+          "is_group": 1,
+          "Intangible Assets": {
+            "account_number": "1-130001",
+            "account_type": "Fixed Asset"
+          },
+          "Accumulated Amortization": {
+            "account_number": "1-130100",
+            "is_group": 1,
+            "account_type": "Accumulated Depreciation",
+            "Accumulated Amortization - Intangibles": {
+              "account_number": "1-130101",
+              "account_type": "Accumulated Depreciation"
+            }
+          }
+        },
+        "Long-term Investments": {
+          "account_number": "1-140000",
+          "is_group": 1,
+          "Long-term Investments": {
+            "account_number": "1-140001",
+            "account_type": "Fixed Asset"
+          }
+        },
+        "Fixed Deposits": {
+          "account_number": "1-150000",
+          "is_group": 1,
+          "Fixed Deposits": {
+            "account_number": "1-150001",
+            "account_type": "Fixed Asset"
+          }
+        }
+      },
+      "Current Assets": {
+        "account_number": "1-200000",
+        "is_group": 1,
+        "Inventory": {
+          "account_number": "1-210000",
+          "is_group": 1,
+          "account_type": "Stock",
+          "Inventory": {
+            "account_number": "1-210001",
+            "account_type": "Stock"
+          }
+        },
+        "Trade & Other Receivables": {
+          "account_number": "1-220000",
+          "is_group": 1,
+          "Trade Receivables": {
+            "account_number": "1-221000",
+            "is_group": 1,
+            "Accounts Receivable (A/R)": {
+              "account_number": "1-221001",
+              "account_type": "Receivable"
+            },
+            "Provision for Bad Debts": {
+              "account_number": "1-221002",
+              "account_type": "Receivable"
+            }
+          },
+          "Other Receivables": {
+            "account_number": "1-222000",
+            "is_group": 1,
+            "Other Receivables": {
+              "account_number": "1-222001",
+              "account_type": "Receivable"
+            },
+            "WHT Receivable": {
+              "account_number": "1-222002",
+              "account_type": "Receivable"
+            },
+            "VAT Receivable": {
+              "account_number": "1-222003",
+              "account_type": "Tax"
+            },
+            "Income Tax Receivable": {
+              "account_number": "1-222004",
+              "account_type": "Receivable"
+            }
+          }
+        },
+        "Advances, Deposits & Prepayments": {
+          "account_number": "1-230000",
+          "is_group": 1,
+          "Advance Payments to Suppliers": {
+            "account_number": "1-230001",
+            "account_type": "Receivable"
+          },
+          "Staff Loans & Salary Advances": {
+            "account_number": "1-230002",
+            "account_type": "Receivable"
+          },
+          "Security & Refundable Deposits": {
+            "account_number": "1-230003",
+            "account_type": "Receivable"
+          },
+          "Prepaid Expenses": {
+            "account_number": "1-230004",
+            "account_type": "Receivable"
+          }
+        },
+        "Bank Accounts": {
+          "account_number": "1-280000",
+          "is_group": 1,
+          "account_type": "Bank",
+          "Savings Accounts": {
+            "account_number": "1-281000",
+            "is_group": 1,
+            "account_type": "Bank",
+            "Savings Account": {
+              "account_number": "1-281001",
+              "account_type": "Bank"
+            }
+          },
+          "Current Accounts": {
+            "account_number": "1-282000",
+            "is_group": 1,
+            "account_type": "Bank",
+            "Current Account": {
+              "account_number": "1-282001",
+              "account_type": "Bank"
+            }
+          }
+        },
+        "Cash & Petty Cash": {
+          "account_number": "1-290000",
+          "is_group": 1,
+          "account_type": "Cash",
+          "Cash": {
+            "account_number": "1-290001",
+            "account_type": "Cash"
+          },
+          "Petty Cash": {
+            "account_number": "1-290002",
+            "account_type": "Cash"
+          }
+        }
+      }
+    },
+    "Source of Funds (Liabilities)": {
+      "account_number": "2-000000",
+      "is_group": 1,
+      "root_type": "Liability",
+      "Non Current Liabilities": {
+        "account_number": "2-100000",
+        "is_group": 1,
+        "Retirement Benefit Obligations": {
+          "account_number": "2-100100",
+          "is_group": 1,
+          "Retirement Benefit Obligations": {
+            "account_number": "2-100101",
+            "account_type": "Payable"
+          }
+        },
+        "Long-term Borrowings": {
+          "account_number": "2-100200",
+          "is_group": 1,
+          "Long-term Loans": {
+            "account_number": "2-100201",
+            "account_type": "Payable"
+          }
+        },
+        "Finance Lease Obligations": {
+          "account_number": "2-100300",
+          "is_group": 1,
+          "Finance Lease Obligations": {
+            "account_number": "2-100301",
+            "account_type": "Payable"
+          }
+        }
+      },
+      "Current Liabilities": {
+        "account_number": "2-200000",
+        "is_group": 1,
+        "Trade Creditors": {
+          "account_number": "2-210000",
+          "is_group": 1,
+          "Accounts Payable (A/P)": {
+            "account_number": "2-210001",
+            "account_type": "Payable"
+          },
+          "Stock Received But Not Billed": {
+            "account_number": "2-210002",
+            "account_type": "Stock Received But Not Billed"
+          },
+          "Assets Received But Not Billed": {
+            "account_number": "2-210003",
+            "account_type": "Asset Received But Not Billed"
+          }
+        },
+        "Other Payables": {
+          "account_number": "2-220000",
+          "is_group": 1,
+          "Other Payables": {
+            "account_number": "2-220001",
+            "account_type": "Payable"
+          }
+        },
+        "Short-term Borrowings": {
+          "account_number": "2-230000",
+          "is_group": 1,
+          "Short-term Loans": {
+            "account_number": "2-230001",
+            "account_type": "Payable"
+          },
+          "Bank Overdraft": {
+            "account_number": "2-230002",
+            "account_type": "Bank"
+          },
+          "Credit Card Accounts": {
+            "account_number": "2-230003",
+            "account_type": "Bank"
+          }
+        },
+        "Accrued Expenses": {
+          "account_number": "2-240000",
+          "is_group": 1,
+          "Accrued Salaries & Allowances": {
+            "account_number": "2-240001",
+            "account_type": "Payable"
+          },
+          "Accrued EPF / ETF": {
+            "account_number": "2-240002",
+            "account_type": "Payable"
+          },
+          "Accrued Professional & Audit Fees": {
+            "account_number": "2-240003",
+            "account_type": "Payable"
+          },
+          "Accrued Utilities & Office Expenses": {
+            "account_number": "2-240004",
+            "account_type": "Payable"
+          },
+          "Other Accrued Expenses": {
+            "account_number": "2-240005",
+            "account_type": "Payable"
+          }
+        },
+        "Directors Loans": {
+          "account_number": "2-250000",
+          "is_group": 1,
+          "Directors Loans": {
+            "account_number": "2-250001",
+            "account_type": "Payable"
+          }
+        },
+        "Taxes Payable (IRD)": {
+          "account_number": "2-270000",
+          "is_group": 1,
+          "account_type": "Tax",
+          "Corporate Income Tax (CIT) Payable": {
+            "account_number": "2-270001",
+            "account_type": "Tax"
+          },
+          "APIT Payable": {
+            "account_number": "2-270002",
+            "account_type": "Tax"
+          },
+          "WHT Payable": {
+            "account_number": "2-270003",
+            "account_type": "Tax"
+          },
+          "VAT Payable": {
+            "account_number": "2-270004",
+            "account_type": "Tax"
+          },
+          "SSCL Payable": {
+            "account_number": "2-270005",
+            "account_type": "Tax"
+          },
+          "Stamp Duty Payable": {
+            "account_number": "2-270006",
+            "account_type": "Tax"
+          }
+        }
+      }
+    },
+    "Equity": {
+      "account_number": "3-000000",
+      "is_group": 1,
+      "root_type": "Equity",
+      "Share Capital": {
+        "account_number": "3-100000",
+        "is_group": 1,
+        "Share Capital": {
+          "account_number": "3-100001"
+        }
+      },
+      "Reserves": {
+        "account_number": "3-200000",
+        "is_group": 1,
+        "Retained Earnings": {
+          "account_number": "3-200001"
+        },
+        "General Reserves": {
+          "account_number": "3-200002"
+        },
+        "Revaluation Reserves": {
+          "account_number": "3-200003"
+        },
+        "Actuarial Reserve": {
+          "account_number": "3-200004"
+        }
+      }
+    },
+    "Income": {
+      "account_number": "4-000000",
+      "is_group": 1,
+      "root_type": "Income",
+      "Revenue": {
+        "account_number": "4-100000",
+        "is_group": 1,
+        "account_type": "Income Account",
+        "Revenue - Local": {
+          "account_number": "4-100001",
+          "account_type": "Income Account"
+        },
+        "Revenue - Foreign": {
+          "account_number": "4-100002",
+          "account_type": "Income Account"
+        },
+        "Revenue - Related Parties": {
+          "account_number": "4-100003",
+          "account_type": "Income Account"
+        }
+      },
+      "Finance & Other Income": {
+        "account_number": "4-200000",
+        "is_group": 1,
+        "account_type": "Income Account",
+        "Interest Income": {
+          "account_number": "4-200001",
+          "account_type": "Income Account"
+        },
+        "Foreign Exchange Gain": {
+          "account_number": "4-200002",
+          "account_type": "Income Account"
+        },
+        "Other Income": {
+          "account_number": "4-200003",
+          "account_type": "Income Account"
+        }
+      }
+    },
+    "Cost of Sales": {
+      "account_number": "5-000000",
+      "is_group": 1,
+      "root_type": "Expense",
+      "Direct Staff Costs": {
+        "account_number": "5-100000",
+        "is_group": 1,
+        "account_type": "Cost of Goods Sold",
+        "Basic Salaries - Direct": {
+          "account_number": "5-100001",
+          "account_type": "Cost of Goods Sold"
+        },
+        "Allowances & Overtime - Direct": {
+          "account_number": "5-100002",
+          "account_type": "Cost of Goods Sold"
+        },
+        "EPF / ETF - Direct": {
+          "account_number": "5-100003",
+          "account_type": "Cost of Goods Sold"
+        },
+        "Provision for Gratuity - Direct": {
+          "account_number": "5-100004",
+          "account_type": "Cost of Goods Sold"
+        }
+      },
+      "Direct Project Costs": {
+        "account_number": "5-200000",
+        "is_group": 1,
+        "account_type": "Cost of Goods Sold",
+        "External Consultancy Fees": {
+          "account_number": "5-200001",
+          "account_type": "Cost of Goods Sold"
+        },
+        "Software License Fees": {
+          "account_number": "5-200002",
+          "account_type": "Cost of Goods Sold"
+        },
+        "Hosting Charges": {
+          "account_number": "5-200003",
+          "account_type": "Cost of Goods Sold"
+        },
+        "Direct Travel & Subsistence": {
+          "account_number": "5-200004",
+          "account_type": "Cost of Goods Sold"
+        }
+      },
+      "Depreciation & Amortization - Direct": {
+        "account_number": "5-300000",
+        "is_group": 1,
+        "account_type": "Depreciation",
+        "Depreciation - Direct Assets": {
+          "account_number": "5-300001",
+          "account_type": "Depreciation"
+        },
+        "Amortization - Intangibles": {
+          "account_number": "5-300002",
+          "account_type": "Depreciation"
+        }
+      }
+    },
+    "Operating Expenses": {
+      "account_number": "6-000000",
+      "is_group": 1,
+      "root_type": "Expense",
+      "Administration Expenses": {
+        "account_number": "6-100000",
+        "is_group": 1,
+        "account_type": "Expense Account",
+        "Basic Salaries - Admin": {
+          "account_number": "6-100001",
+          "account_type": "Expense Account"
+        },
+        "Allowances & Overtime - Admin": {
+          "account_number": "6-100002",
+          "account_type": "Expense Account"
+        },
+        "EPF / ETF - Admin": {
+          "account_number": "6-100003",
+          "account_type": "Expense Account"
+        },
+        "Provision for Gratuity - Admin": {
+          "account_number": "6-100004",
+          "account_type": "Expense Account"
+        },
+        "Staff Bonus": {
+          "account_number": "6-100005",
+          "account_type": "Expense Account"
+        },
+        "Staff Training": {
+          "account_number": "6-100006",
+          "account_type": "Expense Account"
+        },
+        "Telephone & Internet": {
+          "account_number": "6-100007",
+          "account_type": "Expense Account"
+        },
+        "Electricity & Utilities": {
+          "account_number": "6-100008",
+          "account_type": "Expense Account"
+        },
+        "Rent & Office Maintenance": {
+          "account_number": "6-100009",
+          "account_type": "Expense Account"
+        },
+        "Insurance Premiums": {
+          "account_number": "6-100010",
+          "account_type": "Expense Account"
+        },
+        "Audit, Tax & Accounting Fees": {
+          "account_number": "6-100011",
+          "account_type": "Expense Account"
+        },
+        "Bank Charges": {
+          "account_number": "6-100012",
+          "account_type": "Expense Account"
+        },
+        "Travel & Subsistence - Admin": {
+          "account_number": "6-100013",
+          "account_type": "Expense Account"
+        },
+        "Other Admin Expenses": {
+          "account_number": "6-100014",
+          "account_type": "Expense Account"
+        }
+      },
+      "Depreciation - Admin Assets": {
+        "account_number": "6-200000",
+        "is_group": 1,
+        "account_type": "Depreciation",
+        "Depreciation - Admin Assets": {
+          "account_number": "6-200001",
+          "account_type": "Depreciation"
+        }
+      },
+      "Other Operating Expenses": {
+        "account_number": "6-300000",
+        "is_group": 1,
+        "account_type": "Expense Account",
+        "Write-off Account": {
+          "account_number": "6-300001",
+          "account_type": "Expense Account"
+        },
+        "Rounded Off Account": {
+          "account_number": "6-300002",
+          "account_type": "Expense Account"
+        },
+        "Penalty & Facility Charges": {
+          "account_number": "6-300003",
+          "account_type": "Expense Account"
+        }
+      },
+      "Finance Costs": {
+        "account_number": "6-400000",
+        "is_group": 1,
+        "account_type": "Expense Account",
+        "Loan Interest": {
+          "account_number": "6-400001",
+          "account_type": "Expense Account"
+        },
+        "Overdraft Interest": {
+          "account_number": "6-400002",
+          "account_type": "Expense Account"
+        },
+        "Foreign Exchange Loss": {
+          "account_number": "6-400003",
+          "account_type": "Expense Account"
+        }
+      },
+      "Income Tax Expense": {
+        "account_number": "6-500000",
+        "is_group": 1,
+        "account_type": "Expense Account",
+        "Corporate Income Tax Expense": {
+          "account_number": "6-500001",
+          "account_type": "Expense Account"
+        },
+        "AIT / WHT on Interest": {
+          "account_number": "6-500002",
+          "account_type": "Expense Account"
+        }
+      }
+    }
+  }
+}
