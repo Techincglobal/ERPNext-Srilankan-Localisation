@@ -37,4 +37,4 @@ jobs:
 
       - name: Run Semgrep
         run: |
-          semgrep scan --config semgrep-rules/rules .
+          semgrep scan --config semgrep-rules/rules --error

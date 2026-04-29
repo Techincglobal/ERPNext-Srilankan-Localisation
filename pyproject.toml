@@ -1,7 +1,7 @@
 [project]
 name = "erpnext_srilankan_localisation"
 authors = [
-    { name = "servers@techincglobal.com", email = "servers@techincglobal.com"}
+    { name = "TechInc Global", email = "servers@techincglobal.com" }
 ]
 description = "Sri Lankan Localisation for ERPNext"
 requires-python = ">=3.14"
