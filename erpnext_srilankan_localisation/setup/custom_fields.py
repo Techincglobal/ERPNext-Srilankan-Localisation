@@ -32,7 +32,6 @@ CUSTOM_FIELDS = {
 			"fieldtype": "Data",
 			"insert_after": "lk_is_vat_registered",
 			"depends_on": "eval:doc.lk_is_vat_registered==1",
-			"mandatory_depends_on": "eval:doc.lk_is_vat_registered==1",
 			"module": MODULE,
 		},
 		{
@@ -41,7 +40,6 @@ CUSTOM_FIELDS = {
 			"fieldtype": "Attach",
 			"insert_after": "lk_vat_no",
 			"depends_on": "eval:doc.lk_is_vat_registered==1",
-			"mandatory_depends_on": "eval:doc.lk_is_vat_registered==1",
 			"module": MODULE,
 		},
 	],
@@ -76,7 +74,6 @@ CUSTOM_FIELDS = {
 			"fieldtype": "Data",
 			"insert_after": "lk_is_vat_registered",
 			"depends_on": "eval:doc.lk_is_vat_registered==1",
-			"mandatory_depends_on": "eval:doc.lk_is_vat_registered==1",
 			"module": MODULE,
 		},
 		{
@@ -85,7 +82,6 @@ CUSTOM_FIELDS = {
 			"fieldtype": "Attach",
 			"insert_after": "lk_vat_no",
 			"depends_on": "eval:doc.lk_is_vat_registered==1",
-			"mandatory_depends_on": "eval:doc.lk_is_vat_registered==1",
 			"module": MODULE,
 		},
 	],
@@ -118,7 +114,6 @@ CUSTOM_FIELDS = {
 			"fieldtype": "Data",
 			"insert_after": "lk_is_vat_registered",
 			"depends_on": "eval:doc.lk_is_vat_registered==1",
-			"mandatory_depends_on": "eval:doc.lk_is_vat_registered==1",
 			"module": MODULE,
 		},
 		{
@@ -127,7 +122,6 @@ CUSTOM_FIELDS = {
 			"fieldtype": "Attach",
 			"insert_after": "lk_vat_no",
 			"depends_on": "eval:doc.lk_is_vat_registered==1",
-			"mandatory_depends_on": "eval:doc.lk_is_vat_registered==1",
 			"module": MODULE,
 		},
 		{

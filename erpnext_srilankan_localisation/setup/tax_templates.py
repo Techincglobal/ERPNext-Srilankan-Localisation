@@ -51,7 +51,7 @@ def create_sales_tax_templates(company: str, abbr: str):
 
 	templates = [
 		{
-			"title": f"Sales VAT 18% - {abbr}",
+			"title": "Sales VAT 18%",
 			"tax_category": "Sales VAT 18%",
 			"taxes": [
 				{
@@ -63,7 +63,7 @@ def create_sales_tax_templates(company: str, abbr: str):
 			],
 		},
 		{
-			"title": f"Sales VAT + SSCL - {abbr}",
+			"title": "Sales VAT + SSCL",
 			"tax_category": "Sales VAT + SSCL",
 			"taxes": [
 				{
@@ -82,7 +82,7 @@ def create_sales_tax_templates(company: str, abbr: str):
 			],
 		},
 		{
-			"title": f"SSCL - {abbr}",
+			"title": "SSCL",
 			"tax_category": "SSCL",
 			"taxes": [
 				{
@@ -94,7 +94,7 @@ def create_sales_tax_templates(company: str, abbr: str):
 			],
 		},
 		{
-			"title": f"SVAT - {abbr}",
+			"title": "SVAT",
 			"tax_category": "SVAT",
 			"taxes": [
 				{
@@ -107,7 +107,7 @@ def create_sales_tax_templates(company: str, abbr: str):
 			],
 		},
 		{
-			"title": f"SUSPENDED TAX - {abbr}",
+			"title": "SUSPENDED TAX",
 			"tax_category": "SUSPENDED TAX",
 			"taxes": [
 				{
@@ -119,7 +119,7 @@ def create_sales_tax_templates(company: str, abbr: str):
 			],
 		},
 		{
-			"title": f"TAX INVOICE - {abbr}",
+			"title": "TAX INVOICE",
 			"tax_category": "TAX INVOICE",
 			"taxes": [
 				{
@@ -131,12 +131,12 @@ def create_sales_tax_templates(company: str, abbr: str):
 			],
 		},
 		{
-			"title": f"Non VAT Sales - {abbr}",
+			"title": "Non VAT Sales",
 			"tax_category": "Non VAT",
 			"taxes": [],
 		},
 		{
-			"title": f"VAT Exempt Sales - {abbr}",
+			"title": "VAT Exempt Sales",
 			"tax_category": "VAT Exempt",
 			"taxes": [],
 		},
@@ -151,7 +151,7 @@ def create_purchase_tax_templates(company: str, abbr: str):
 
 	templates = [
 		{
-			"title": f"Purchase VAT 18% - {abbr}",
+			"title": "Purchase VAT 18%",
 			"tax_category": "Purchase VAT 18%",
 			"taxes": [
 				{
@@ -163,7 +163,7 @@ def create_purchase_tax_templates(company: str, abbr: str):
 			],
 		},
 		{
-			"title": f"Purchase VAT + SSCL - {abbr}",
+			"title": "Purchase VAT + SSCL",
 			"tax_category": "Purchase VAT + SSCL",
 			"taxes": [
 				{
@@ -182,7 +182,7 @@ def create_purchase_tax_templates(company: str, abbr: str):
 			],
 		},
 		{
-			"title": f"Non VAT Purchase - {abbr}",
+			"title": "Non VAT Purchase",
 			"tax_category": "NON VAT - Purchase",
 			"taxes": [],
 		},
@@ -193,7 +193,7 @@ def create_purchase_tax_templates(company: str, abbr: str):
 
 def _insert_sales_templates(templates: list, company: str):
 	for t in templates:
-		if frappe.db.exists("Sales Taxes and Charges Template", t["title"]):
+		if frappe.db.exists("Sales Taxes and Charges Template", {"company": company, "title": t["title"]}):
 			continue
 		if not all(tax.get("account_head") for tax in t["taxes"]):
 			continue
@@ -216,12 +216,12 @@ def _insert_sales_templates(templates: list, company: str):
 					for tax in t["taxes"]
 				],
 			}
-		).insert(ignore_permissions=True)
+		).insert(ignore_permissions=True, ignore_if_duplicate=True)
 
 
 def _insert_purchase_templates(templates: list, company: str):
 	for t in templates:
-		if frappe.db.exists("Purchase Taxes and Charges Template", t["title"]):
+		if frappe.db.exists("Purchase Taxes and Charges Template", {"company": company, "title": t["title"]}):
 			continue
 		if not all(tax.get("account_head") for tax in t["taxes"]):
 			continue
@@ -243,4 +243,4 @@ def _insert_purchase_templates(templates: list, company: str):
 					for tax in t["taxes"]
 				],
 			}
-		).insert(ignore_permissions=True)
+		).insert(ignore_permissions=True, ignore_if_duplicate=True)

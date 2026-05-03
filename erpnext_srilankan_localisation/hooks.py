@@ -89,6 +89,7 @@ required_apps = ["erpnext"]
 # before_install = "erpnext_srilankan_localisation.install.before_install"
 after_install = "erpnext_srilankan_localisation.install.after_install"
 after_migrate = "erpnext_srilankan_localisation.migrate.after_migrate"
+setup_wizard_complete = "erpnext_srilankan_localisation.install.after_setup_wizard"
 
 # Uninstallation
 # ------------
@@ -142,12 +143,6 @@ before_uninstall = "erpnext_srilankan_localisation.uninstall.before_uninstall"
 # Hook on document methods and events
 
 doc_events = {
-	"Customer": {
-		"validate": "erpnext_srilankan_localisation.overrides.validations.validate_customer",
-	},
-	"Supplier": {
-		"validate": "erpnext_srilankan_localisation.overrides.validations.validate_supplier",
-	},
 	"Company": {
 		"after_insert": "erpnext_srilankan_localisation.overrides.company.after_insert",
 	},
