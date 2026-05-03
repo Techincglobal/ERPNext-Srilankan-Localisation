@@ -6,9 +6,9 @@ from erpnext_srilankan_localisation.setup.create_properties import initial_setup
 from erpnext_srilankan_localisation.setup.tax_templates import create_sri_lanka_tax_setup
 
 
-def after_install():
+def after_migrate():
 	try:
-		print("Setting up ERPNext Sri Lankan Localisation...")
+		print("Running ERPNext Sri Lankan Localisation migrations...")
 
 		copy_sri_lanka_chart_of_accounts()
 		initial_setup()
@@ -16,14 +16,13 @@ def after_install():
 			create_sri_lanka_tax_setup(company)
 
 		click.secho(
-			"Thank you for installing ERPNext Sri Lankan Localisation!",
+			"ERPNext Sri Lankan Localisation migrations completed successfully.",
 			fg="green",
 		)
 
 	except Exception as e:
 		click.secho(
-			"Installation for ERPNext Sri Lankan Localisation failed due to an error. "
-			"Please try re-installing the app.",
+			"ERPNext Sri Lankan Localisation migration failed due to an error.",
 			fg="bright_red",
 		)
 		raise e

@@ -1,6 +1,3 @@
-import frappe
-from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
-
 MODULE = "Erpnext Srilankan Localisation"
 
 CUSTOM_FIELDS = {
@@ -191,14 +188,3 @@ CUSTOM_FIELDS = {
 		},
 	],
 }
-
-
-def setup_custom_fields():
-	create_custom_fields(CUSTOM_FIELDS, update=True)
-
-
-def remove_custom_fields():
-	for doctype, fields in CUSTOM_FIELDS.items():
-		for field in fields:
-			frappe.db.delete("Custom Field", {"dt": doctype, "fieldname": field["fieldname"]})
-	frappe.clear_cache()

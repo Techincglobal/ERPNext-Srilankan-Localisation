@@ -3,12 +3,16 @@ from frappe import _
 
 
 def validate_customer(doc, method=None):
+	if doc.get("is_internal_customer"):
+		return
 	_validate_vat_fields(doc)
 	if doc.customer_type != "Individual":
 		_validate_business_tax_fields(doc)
 
 
 def validate_supplier(doc, method=None):
+	if doc.get("is_internal_supplier"):
+		return
 	_validate_vat_fields(doc)
 	if doc.supplier_type != "Individual":
 		_validate_business_tax_fields(doc)

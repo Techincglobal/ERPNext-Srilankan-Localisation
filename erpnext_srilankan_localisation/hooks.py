@@ -10,6 +10,7 @@ app_license = "mit"
 
 required_apps = ["erpnext"]
 
+
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
 # 	{
@@ -87,7 +88,7 @@ required_apps = ["erpnext"]
 
 # before_install = "erpnext_srilankan_localisation.install.before_install"
 after_install = "erpnext_srilankan_localisation.install.after_install"
-after_migrate = "erpnext_srilankan_localisation.setup.after_migrate"
+after_migrate = "erpnext_srilankan_localisation.migrate.after_migrate"
 
 # Uninstallation
 # ------------
@@ -146,6 +147,9 @@ doc_events = {
 	},
 	"Supplier": {
 		"validate": "erpnext_srilankan_localisation.overrides.validations.validate_supplier",
+	},
+	"Company": {
+		"after_insert": "erpnext_srilankan_localisation.overrides.company.after_insert",
 	},
 }
 
@@ -258,4 +262,3 @@ doc_events = {
 # ------------
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
-
