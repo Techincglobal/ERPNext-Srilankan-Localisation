@@ -93,6 +93,7 @@ after_migrate = "erpnext_srilankan_localisation.setup.after_migrate"
 # ------------
 
 before_uninstall = "erpnext_srilankan_localisation.uninstall.before_uninstall"
+
 # after_uninstall = "erpnext_srilankan_localisation.uninstall.after_uninstall"
 
 # Integration Setup
@@ -139,13 +140,14 @@ before_uninstall = "erpnext_srilankan_localisation.uninstall.before_uninstall"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Customer": {
+		"validate": "erpnext_srilankan_localisation.overrides.validations.validate_customer",
+	},
+	"Supplier": {
+		"validate": "erpnext_srilankan_localisation.overrides.validations.validate_supplier",
+	},
+}
 
 # Scheduled Tasks
 # ---------------

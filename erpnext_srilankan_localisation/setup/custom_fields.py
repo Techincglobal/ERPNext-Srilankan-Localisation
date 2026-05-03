@@ -1,0 +1,204 @@
+import frappe
+from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
+
+MODULE = "Erpnext Srilankan Localisation"
+
+CUSTOM_FIELDS = {
+	"Customer": [
+		{
+			"fieldname": "lk_brc_no",
+			"label": "BRC No",
+			"fieldtype": "Data",
+			"insert_after": "tax_id",
+			"depends_on": "eval:doc.customer_type!='Individual'",
+			"module": MODULE,
+		},
+		{
+			"fieldname": "lk_tin_no",
+			"label": "TIN Registration No",
+			"fieldtype": "Data",
+			"insert_after": "lk_brc_no",
+			"depends_on": "eval:doc.customer_type!='Individual'",
+			"module": MODULE,
+		},
+		{
+			"fieldname": "lk_is_vat_registered",
+			"label": "VAT Registered",
+			"fieldtype": "Check",
+			"insert_after": "lk_tin_no",
+			"default": "0",
+			"module": MODULE,
+		},
+		{
+			"fieldname": "lk_vat_no",
+			"label": "VAT No",
+			"fieldtype": "Data",
+			"insert_after": "lk_is_vat_registered",
+			"depends_on": "eval:doc.lk_is_vat_registered==1",
+			"mandatory_depends_on": "eval:doc.lk_is_vat_registered==1",
+			"module": MODULE,
+		},
+		{
+			"fieldname": "lk_vat_registration_certificate",
+			"label": "VAT Registration Certificate",
+			"fieldtype": "Attach",
+			"insert_after": "lk_vat_no",
+			"depends_on": "eval:doc.lk_is_vat_registered==1",
+			"mandatory_depends_on": "eval:doc.lk_is_vat_registered==1",
+			"module": MODULE,
+		},
+	],
+	"Supplier": [
+		{
+			"fieldname": "lk_brc_no",
+			"label": "BRC No",
+			"fieldtype": "Data",
+			"insert_after": "supplier_group",
+			"depends_on": "eval:doc.supplier_type!='Individual'",
+			"module": MODULE,
+		},
+		{
+			"fieldname": "lk_tin_no",
+			"label": "TIN Registration No",
+			"fieldtype": "Data",
+			"insert_after": "lk_brc_no",
+			"depends_on": "eval:doc.supplier_type!='Individual'",
+			"module": MODULE,
+		},
+		{
+			"fieldname": "lk_is_vat_registered",
+			"label": "VAT Registered",
+			"fieldtype": "Check",
+			"insert_after": "lk_tin_no",
+			"default": "0",
+			"module": MODULE,
+		},
+		{
+			"fieldname": "lk_vat_no",
+			"label": "VAT No",
+			"fieldtype": "Data",
+			"insert_after": "lk_is_vat_registered",
+			"depends_on": "eval:doc.lk_is_vat_registered==1",
+			"mandatory_depends_on": "eval:doc.lk_is_vat_registered==1",
+			"module": MODULE,
+		},
+		{
+			"fieldname": "lk_vat_registration_certificate",
+			"label": "VAT Registration Certificate",
+			"fieldtype": "Attach",
+			"insert_after": "lk_vat_no",
+			"depends_on": "eval:doc.lk_is_vat_registered==1",
+			"mandatory_depends_on": "eval:doc.lk_is_vat_registered==1",
+			"module": MODULE,
+		},
+	],
+	"Company": [
+		{
+			"fieldname": "lk_brc_no",
+			"label": "BRC No",
+			"fieldtype": "Data",
+			"insert_after": "tax_id",
+			"module": MODULE,
+		},
+		{
+			"fieldname": "lk_tin_no",
+			"label": "TIN Registration No",
+			"fieldtype": "Data",
+			"insert_after": "lk_brc_no",
+			"module": MODULE,
+		},
+		{
+			"fieldname": "lk_is_vat_registered",
+			"label": "VAT Registered",
+			"fieldtype": "Check",
+			"insert_after": "lk_tin_no",
+			"default": "0",
+			"module": MODULE,
+		},
+		{
+			"fieldname": "lk_vat_no",
+			"label": "VAT No",
+			"fieldtype": "Data",
+			"insert_after": "lk_is_vat_registered",
+			"depends_on": "eval:doc.lk_is_vat_registered==1",
+			"mandatory_depends_on": "eval:doc.lk_is_vat_registered==1",
+			"module": MODULE,
+		},
+		{
+			"fieldname": "lk_vat_registration_certificate",
+			"label": "VAT Registration Certificate",
+			"fieldtype": "Attach",
+			"insert_after": "lk_vat_no",
+			"depends_on": "eval:doc.lk_is_vat_registered==1",
+			"mandatory_depends_on": "eval:doc.lk_is_vat_registered==1",
+			"module": MODULE,
+		},
+		{
+			"fieldname": "lk_is_sscl_registered",
+			"label": "SSCL Registered",
+			"fieldtype": "Check",
+			"insert_after": "lk_vat_registration_certificate",
+			"default": "0",
+			"module": MODULE,
+		},
+		{
+			"fieldname": "lk_sscl_no",
+			"label": "SSCL Registration No",
+			"fieldtype": "Data",
+			"insert_after": "lk_is_sscl_registered",
+			"depends_on": "eval:doc.lk_is_sscl_registered==1",
+			"module": MODULE,
+		},
+	],
+	"Sales Invoice": [
+		{
+			"fieldname": "lk_customer_tin_no",
+			"label": "Customer TIN No",
+			"fieldtype": "Data",
+			"insert_after": "tax_id",
+			"fetch_from": "customer.lk_tin_no",
+			"read_only": 1,
+			"module": MODULE,
+		},
+		{
+			"fieldname": "lk_customer_vat_no",
+			"label": "Customer VAT No",
+			"fieldtype": "Data",
+			"insert_after": "lk_customer_tin_no",
+			"fetch_from": "customer.lk_vat_no",
+			"read_only": 1,
+			"module": MODULE,
+		},
+	],
+	"Purchase Invoice": [
+		{
+			"fieldname": "lk_supplier_tin_no",
+			"label": "Supplier TIN No",
+			"fieldtype": "Data",
+			"insert_after": "tax_id",
+			"fetch_from": "supplier.lk_tin_no",
+			"read_only": 1,
+			"module": MODULE,
+		},
+		{
+			"fieldname": "lk_supplier_vat_no",
+			"label": "Supplier VAT No",
+			"fieldtype": "Data",
+			"insert_after": "lk_supplier_tin_no",
+			"fetch_from": "supplier.lk_vat_no",
+			"read_only": 1,
+			"module": MODULE,
+		},
+	],
+}
+
+
+def setup_custom_fields():
+	create_custom_fields(CUSTOM_FIELDS, update=True)
+
+
+def remove_custom_fields():
+	for doctype, fields in CUSTOM_FIELDS.items():
+		for field in fields:
+			frappe.db.delete("Custom Field", {"dt": doctype, "fieldname": field["fieldname"]})
+	frappe.clear_cache()
