@@ -4,7 +4,6 @@ import frappe
 from erpnext_srilankan_localisation.setup.chart_of_accounts import copy_sri_lanka_chart_of_accounts
 from erpnext_srilankan_localisation.setup.create_properties import initial_setup
 from erpnext_srilankan_localisation.setup.payment_methods import create_payment_methods
-from erpnext_srilankan_localisation.setup.print_formats import create_print_formats
 from erpnext_srilankan_localisation.setup.tax_templates import create_sri_lanka_tax_setup
 
 
@@ -20,7 +19,6 @@ def after_install():
 		copy_sri_lanka_chart_of_accounts()
 		initial_setup()
 		create_payment_methods()
-		create_print_formats()
 		for company in frappe.get_all("Company", filters={"country": "Sri Lanka"}, pluck="name"):
 			create_sri_lanka_tax_setup(company)
 

@@ -10,6 +10,10 @@ app_license = "mit"
 
 required_apps = ["erpnext"]
 
+fixtures = [
+	{"dt": "Print Format", "filters": [["name", "=", "Tax Invoice - LK"]]},
+]
+
 
 
 # Each item in the list will be shown as an app in the apps page
