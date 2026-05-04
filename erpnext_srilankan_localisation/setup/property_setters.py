@@ -3,14 +3,14 @@ PROPERTIES = [
 		"doctype": "Sales Invoice",
 		"fieldname": "naming_series",
 		"property": "options",
-		"value": "YY.MMMYC.-.#####\nYY.MMM.-.#####\nSINV-.YYYY.-",
+		"value": "YY.MMM.-.#####\nSINV-.YYYY.-",
 		"property_type": "Text",
 	},
 	{
 		"doctype": "Sales Invoice",
 		"fieldname": "naming_series",
 		"property": "default",
-		"value": "YY.MMMYC.-.#####",
+		"value": "YY.MMM.-.#####",
 		"property_type": "Data",
 	},
 ]
