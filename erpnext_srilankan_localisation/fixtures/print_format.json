@@ -1,0 +1,28 @@
+[
+    {
+        "doctype": "Print Format",
+        "name": "Tax Invoice - LK",
+        "doc_type": "Sales Invoice",
+        "module": "Erpnext Srilankan Localisation",
+        "print_format_type": "Jinja",
+        "custom_format": 1,
+        "standard": "No",
+        "disabled": 0,
+        "pdf_generator": "wkhtmltopdf",
+        "margin_top": 20.0,
+        "margin_bottom": 40.0,
+        "margin_left": 0.0,
+        "margin_right": 0.0,
+        "page_number": "Hide",
+        "font_size": 14,
+        "absolute_value": 0,
+        "align_labels_right": 0,
+        "default_print_language": "en",
+        "line_breaks": 0,
+        "print_format_builder": 0,
+        "print_format_builder_beta": 0,
+        "raw_printing": 0,
+        "show_section_headings": 0,
+        "docstatus": 0
+    }
+]

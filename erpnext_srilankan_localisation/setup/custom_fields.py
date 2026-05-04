@@ -143,6 +143,15 @@ CUSTOM_FIELDS = {
 	],
 	"Sales Invoice": [
 		{
+			"fieldname": "lk_mode_of_payment",
+			"label": "Mode of Payment",
+			"fieldtype": "Link",
+			"options": "Mode of Payment",
+			"insert_after": "due_date",
+			"reqd": 1,
+			"module": MODULE,
+		},
+		{
 			"fieldname": "lk_customer_tin_no",
 			"label": "Customer TIN No",
 			"fieldtype": "Data",

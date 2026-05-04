@@ -159,8 +159,7 @@
      "root_type": "Asset",
      "Fixed Deposit": {
       "account_number": "1-140001",
-      "root_type": "Asset",
-      "account_type": "Fixed Asset"
+      "root_type": "Asset"
      }
     }
    },
@@ -226,13 +225,11 @@
       "root_type": "Asset",
       "Advance to Suppliers": {
        "account_number": "1-230101",
-       "root_type": "Asset",
-       "account_type": "Receivable"
+       "root_type": "Asset"
       },
       "Prepaid Expenses": {
        "account_number": "1-230102",
-       "root_type": "Asset",
-       "account_type": "Receivable"
+       "root_type": "Asset"
       }
      },
      "Statutory Receivables": {
@@ -242,22 +239,22 @@
       "VAT Receivable": {
        "account_number": "1-230201",
        "root_type": "Asset",
-       "account_type": "Receivable"
+       "account_type": "Tax"
       },
       "VAT Control A/C": {
        "account_number": "1-230202",
        "root_type": "Asset",
-       "account_type": "Receivable"
+       "account_type": "Tax"
       },
       "NBT Receivable": {
        "account_number": "1-230203",
        "root_type": "Asset",
-       "account_type": "Receivable"
+       "account_type": "Tax"
       },
       "WHT Receivable": {
        "account_number": "1-230204",
        "root_type": "Asset",
-       "account_type": "Receivable"
+       "account_type": "Tax"
       }
      },
      "Other Receivables": {
@@ -266,13 +263,11 @@
       "root_type": "Asset",
       "Staff Loans": {
        "account_number": "1-230301",
-       "root_type": "Asset",
-       "account_type": "Receivable"
+       "root_type": "Asset"
       },
       "Salary Advance": {
        "account_number": "1-230302",
-       "root_type": "Asset",
-       "account_type": "Receivable"
+       "root_type": "Asset"
       }
      }
     },
@@ -283,7 +278,6 @@
      "account_type": "Bank",
      "Bank Balance": {
       "account_number": "1-240001",
-      "is_group": 1,
       "root_type": "Asset",
       "account_type": "Bank"
      }
@@ -336,7 +330,6 @@
     "account_number": "2-200000",
     "is_group": 1,
     "root_type": "Liability",
-    "account_type": "Payable",
     "Trade Payable": {
      "account_number": "2-210000",
      "is_group": 1,
@@ -355,68 +348,62 @@
      "account_type": "Payable",
      "Short Term Loan": {
       "account_number": "2-220001",
-      "root_type": "Liability",
-      "account_type": "Payable"
+      "root_type": "Liability"
      },
      "Accrued Expenses": {
       "account_number": "2-220002",
-      "root_type": "Liability",
-      "account_type": "Payable"
+      "root_type": "Liability"
      },
      "VAT Payable": {
       "account_number": "2-220003",
       "root_type": "Liability",
-      "account_type": "Payable"
+      "account_type": "Tax"
      },
      "SSCL Payable": {
       "account_number": "2-220004",
       "root_type": "Liability",
-      "account_type": "Payable"
+      "account_type": "Tax"
      },
      "Stamp Duty Payable": {
       "account_number": "2-220005",
       "root_type": "Liability",
-      "account_type": "Payable"
+      "account_type": "Tax"
      },
      "WHT Payable": {
       "account_number": "2-220006",
       "root_type": "Liability",
-      "account_type": "Payable"
+      "account_type": "Tax"
      },
      "Income Tax Payable": {
       "account_number": "2-220007",
       "root_type": "Liability",
-      "account_type": "Payable"
+      "account_type": "Tax"
      },
      "Salary Payable": {
       "account_number": "2-220008",
-      "root_type": "Liability",
-      "account_type": "Payable"
+      "root_type": "Liability"
      },
      "EPF Payable": {
       "account_number": "2-220009",
-      "root_type": "Liability",
-      "account_type": "Payable"
+      "root_type": "Liability"
      },
      "ETF Payable": {
       "account_number": "2-220010",
-      "root_type": "Liability",
-      "account_type": "Payable"
+      "root_type": "Liability"
      },
      "APIT Payable": {
       "account_number": "2-220011",
-      "root_type": "Liability",
-      "account_type": "Payable"
+      "root_type": "Liability"
      },
      "Stock Received But Not Billed": {
       "account_number": "2-220012",
       "root_type": "Liability",
-      "account_type": "Payable"
+      "account_type": "Stock Received But Not Billed"
      },
      "Asset Received But Not Billed": {
       "account_number": "2-220013",
       "root_type": "Liability",
-      "account_type": "Payable"
+      "account_type": "Asset Received But Not Billed"
      },
      "SVAT Suspense": {
       "account_number": "2-220014",
@@ -454,16 +441,23 @@
     "root_type": "Expense",
     "Mataerial Cost": {
      "account_number": "5-100001",
-     "root_type": "Expense"
+     "root_type": "Expense",
+     "account_type": "Cost of Goods Sold"
     },
     "Direct Labour - DL": {
      "account_number": "5-100002",
-     "root_type": "Expense"
+     "root_type": "Expense",
+     "account_type": "Cost of Goods Sold"
     },
     "Direct Overheads": {
      "account_number": "5-100003",
      "root_type": "Expense",
      "account_type": "Cost of Goods Sold"
+    },
+    "Stock Adjustment": {
+     "account_number": "5-100004",
+     "root_type": "Expense",
+     "account_type": "Stock Adjustment"
     }
    },
    "Indirect  Cost": {
@@ -472,7 +466,8 @@
     "root_type": "Expense",
     "Indirect Production Cost": {
      "account_number": "5-200001",
-     "root_type": "Expense"
+     "root_type": "Expense",
+     "account_type": "Cost of Goods Sold"
     },
     "Indirect Overheads": {
      "account_number": "5-200002",
@@ -492,7 +487,8 @@
     "root_type": "Income",
     "Sales": {
      "account_number": "4-100001",
-     "root_type": "Income"
+     "root_type": "Income",
+     "account_type": "Income Account"
     }
    }
   },
@@ -505,7 +501,7 @@
     "account_number": "6-100000",
     "is_group": 1,
     "root_type": "Income",
-    "Disposal of Fixed Assets - Proft/(Loss)": {
+    "Disposal of Fixed Assets - Profit/(Loss)": {
      "account_number": "6-100001",
      "root_type": "Income",
      "account_type": "Income Account"
@@ -689,7 +685,7 @@
     "Round Off": {
      "account_number": "7-400006",
      "root_type": "Expense",
-     "account_type": "Expense Account"
+     "account_type": "Round Off"
     },
     "Write off Account": {
      "account_number": "7-400007",
