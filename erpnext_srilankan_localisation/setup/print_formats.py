@@ -1,5 +1,3 @@
-import os
-
 import frappe
 
 
@@ -37,6 +35,6 @@ def _upsert_print_format(name: str, html_file: str):
 
 
 def _read_html(filename: str) -> str:
-	path = os.path.join(os.path.dirname(__file__), "..", "print_formats", filename)
-	with open(os.path.abspath(path)) as f:
+	path = frappe.get_app_path("erpnext_srilankan_localisation", "print_formats", filename)
+	with open(path) as f:
 		return f.read()
