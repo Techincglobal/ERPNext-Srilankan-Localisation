@@ -6,7 +6,7 @@ from erpnext_srilankan_localisation.setup.create_properties import initial_setup
 from erpnext_srilankan_localisation.setup.tax_templates import create_sri_lanka_tax_setup
 
 
-def after_setup_wizard(args=None):
+def after_setup_wizard(wizard_args=None):
 	for company in frappe.get_all("Company", filters={"country": "Sri Lanka"}, pluck="name"):
 		create_sri_lanka_tax_setup(company)
 

@@ -148,6 +148,12 @@ doc_events = {
 	},
 }
 
+naming_series_variables = {
+	"TYY": "erpnext_srilankan_localisation.utils.naming.parse_naming_series_variable",
+	"MMM": "erpnext_srilankan_localisation.utils.naming.parse_naming_series_variable",
+}
+
+
 # Scheduled Tasks
 # ---------------
 
