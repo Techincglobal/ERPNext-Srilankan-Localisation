@@ -5,6 +5,7 @@ from erpnext_srilankan_localisation.setup.chart_of_accounts import copy_sri_lank
 from erpnext_srilankan_localisation.setup.create_properties import initial_setup
 from erpnext_srilankan_localisation.setup.payment_methods import create_payment_methods
 from erpnext_srilankan_localisation.setup.tax_templates import create_sri_lanka_tax_setup
+from erpnext_srilankan_localisation.setup.wht_categories import create_wht_categories
 
 
 def after_migrate():
@@ -16,6 +17,7 @@ def after_migrate():
 		create_payment_methods()
 		for company in frappe.get_all("Company", filters={"country": "Sri Lanka"}, pluck="name"):
 			create_sri_lanka_tax_setup(company)
+		create_wht_categories()
 
 		click.secho(
 			"ERPNext Sri Lankan Localisation migrations completed successfully.",

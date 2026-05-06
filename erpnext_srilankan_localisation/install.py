@@ -8,6 +8,7 @@ from erpnext_srilankan_localisation.setup.tax_templates import (
 	create_sri_lanka_tax_setup,
 	remove_erpnext_default_setup,
 )
+from erpnext_srilankan_localisation.setup.wht_categories import create_wht_categories
 
 
 def after_setup_wizard(wizard_args=None):
@@ -25,6 +26,7 @@ def after_install():
 		create_payment_methods()
 		for company in frappe.get_all("Company", filters={"country": "Sri Lanka"}, pluck="name"):
 			create_sri_lanka_tax_setup(company)
+		create_wht_categories()
 
 		click.secho(
 			"Thank you for installing ERPNext Sri Lankan Localisation!",
