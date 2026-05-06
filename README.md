@@ -2,96 +2,66 @@
 
 Sri Lankan localisation for ERPNext, built and maintained by [TechInc Global](https://techincglobal.com).
 
+---
+
 ## Features
 
-### Chart of Accounts
-A Sri Lanka-specific chart of accounts is included and automatically applied when a new company with country **Sri Lanka** is created.
+- **Sri Lanka Chart of Accounts** — automatically applied when a Sri Lankan company is created via the setup wizard
+- **VAT & SSCL tax templates** — sales and purchase templates for 18% VAT, 2.5% SSCL, SVAT, and non-VAT transactions
+- **WHT tax categories** — seven Withholding Tax categories (interest, service fees, rent, royalties, dividends) linked automatically to the WHT Payable account
+- **Custom fields** — TIN, BRC No, and VAT/SSCL registration fields on Company, Customer, Supplier, Sales Invoice, and Purchase Invoice
+- **Tax Invoice print format** — IRD-compliant layout with supplier/purchaser TIN, address, tax breakdown, and WHT deduction section
+- **Naming series variables** — `TYY` (two-digit year) and `MMM` (three-letter month) for date-stamped invoice serials
+- **LK Tax Settings** — configurable validation to enforce customer TIN on invoice submission
+- **Payment methods** — Credit/Debit Card, Mobile Payment, and Online Payment created on install
 
-### Tax Setup
-Tax categories and tax templates are created automatically for each Sri Lankan company:
-
-**Sales templates**
-- Sales VAT 18%
-- Sales VAT + SSCL (2.5% SSCL on net + 18% VAT on SSCL-inclusive total)
-- SSCL
-- SVAT
-- Suspended Tax
-- Tax Invoice
-- Non VAT Sales
-- VAT Exempt Sales
-
-**Purchase templates**
-- Purchase VAT 18%
-- Purchase VAT + SSCL
-- Non VAT Purchase
-
-### Custom Fields
-
-**Company**
-- BRC No
-- TIN Registration No
-- VAT Registered / VAT No / VAT Registration Certificate
-- SSCL Registered / SSCL Registration No
-
-**Customer & Supplier**
-- BRC No
-- TIN Registration No
-- VAT Registered / VAT No / VAT Registration Certificate
-
-**Sales Invoice**
-- Mode of Payment (`lk_mode_of_payment`)
-- Customer TIN No (fetched from Customer)
-- Customer VAT No (fetched from Customer)
-
-**Purchase Invoice**
-- Supplier TIN No (fetched from Supplier)
-- Supplier VAT No (fetched from Supplier)
-
-### Payment Methods
-The following modes of payment are created on install:
-- Credit/Debit Card
-- Mobile Payment
-- Online Payment
-
-### Naming Series Variables
-Two custom naming series variables are available for use in document naming:
-
-| Variable | Output | Example |
-|----------|--------|---------|
-| `TYY` | Two-digit fiscal year (from posting date) | `26` |
-| `MMM` | Three-letter month abbreviation (from posting date) | `JAN` |
-
-Example series: `SINV-TYY-MMM-.####` → `SINV-26-JAN-0001`
-
-### Print Format
-A **Tax Invoice - LK** print format for Sales Invoice is included, compliant with Sri Lankan tax invoice requirements. It displays supplier and purchaser TIN numbers, VAT details, and itemised amounts.
+---
 
 ## Requirements
 
-- ERPNext
+- ERPNext v15
 
 ## Installation
 
 ```bash
-cd $PATH_TO_YOUR_BENCH
-bench get-app $URL_OF_THIS_REPO --branch develop
-bench install-app erpnext_srilankan_localisation
+bench get-app https://github.com/Techincglobal/erpnext_srilankan_localisation --branch develop
+bench --site <your-site> install-app erpnext_srilankan_localisation
 ```
+
+---
+
+## Documentation
+
+### Setup
+
+| Guide | Description |
+|---|---|
+| [Installation](docs/setup/01-installation.md) | Full install steps and setup wizard walkthrough |
+| [Company Setup](docs/setup/02-company-setup.md) | TIN, VAT, and SSCL fields on the company record |
+| [Customer & Supplier Setup](docs/setup/03-customer-supplier-setup.md) | TIN and VAT fields on parties |
+
+### Configuration
+
+| Guide | Description |
+|---|---|
+| [Tax Templates](docs/configuration/01-tax-templates.md) | All VAT/SSCL tax templates explained |
+| [WHT Categories](docs/configuration/05-wht-categories.md) | Withholding Tax categories and invoice usage |
+| [LK Tax Settings](docs/configuration/02-lk-tax-settings.md) | TIN validation toggle |
+| [Naming Series](docs/configuration/03-naming-series.md) | TYY and MMM custom series variables |
+| [Currency & Rounding](docs/configuration/04-currency-rounding.md) | Removing cent values for LKR |
+
+---
 
 ## Contributing
 
-This app uses `pre-commit` for code formatting and linting. Install and enable it before contributing:
+This app uses `pre-commit` for code formatting and linting:
 
 ```bash
 cd apps/erpnext_srilankan_localisation
 pre-commit install
 ```
 
-Tools configured:
-- **ruff** — Python linting and formatting
-- **eslint** — JavaScript linting
-- **prettier** — JavaScript/CSS formatting
-- **pyupgrade** — Python syntax upgrades
+Tools: **ruff** (Python), **eslint** + **prettier** (JS/CSS), **pyupgrade**
 
 ## License
 
