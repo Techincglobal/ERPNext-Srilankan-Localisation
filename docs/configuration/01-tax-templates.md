@@ -1,6 +1,6 @@
 # Tax Templates
 
-The app creates a full set of Sri Lankan tax templates on install. Select the appropriate one from the **Taxes and Charges** field when creating a Sales Invoice or Purchase Invoice.
+The app creates the standard Sri Lankan sales and purchase tax templates for supported transaction scenarios. Select the appropriate template from **Taxes and Charges** on a Sales Invoice or Purchase Invoice.
 
 ---
 
@@ -13,11 +13,11 @@ The app creates a full set of Sri Lankan tax templates on install. Select the ap
 | **Sales VAT 18%** | Standard sale subject to VAT only |
 | **Sales VAT + SSCL** | Sale subject to both SSCL (2.5%) and VAT (18%) |
 | **SSCL** | Sale subject to SSCL only |
-| **SVAT** | Selling to a registered SVAT scheme customer |
-| **SUSPENDED TAX** | Suspended tax transaction (as advised by your tax advisor) |
+| **SVAT** | Transaction handled under SVAT rules |
+| **SUSPENDED TAX** | Suspended tax transaction, if applicable |
 | **NON VAT - Sales** | Sale not subject to VAT |
 
-The **Sales VAT + SSCL** template applies SSCL first, then VAT on the SSCL-inclusive total:
+The **Sales VAT + SSCL** template applies SSCL first and then VAT on the SSCL-inclusive total.
 
 ![Sales VAT + SSCL template — charge breakdown](../images/Sales%20VAT%20%2B%20SSCL%20template%20detail.png)
 
@@ -37,18 +37,22 @@ The **Sales VAT + SSCL** template applies SSCL first, then VAT on the SSCL-inclu
 
 ## On a submitted Sales Invoice
 
-The taxes breakdown on a submitted invoice:
+A submitted Sales Invoice shows the taxes populated from the selected template together with any WHT deduction applied on the invoice.
 
 ![Submitted Sales Invoice — taxes](../images/Submitted%20Sales%20Invoice%20taxes.png)
 
-And the resulting General Ledger entries:
+The resulting General Ledger entries confirm the tax and round-off postings.
 
 ![General Ledger — submitted Sales Invoice](../images/General%20Ledger%20for%20Submitted%20Sales%20Invoice.png)
 
 ---
 
-> If you are unsure which template applies to a transaction, consult your tax advisor.
+## Notes
+
+- Use **sales templates** on Sales Invoices and **purchase templates** on Purchase Invoices.
+- If WHT applies, it appears as a separate deduction row on the invoice in addition to VAT and SSCL.
+- Review account heads in each template before using the app in production.
 
 ---
 
-> Next: [WHT Categories](05-wht-categories.md)
+> Next: [LK Tax Settings](02-lk-tax-settings.md)

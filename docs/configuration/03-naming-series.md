@@ -1,38 +1,50 @@
 # Naming Series
 
-Sales Invoices are numbered automatically using a date-stamped format. The default series is:
+Sales Invoices can be numbered using a date-based format. A common Sri Lanka-oriented series used in this app is:
 
-```
+```text
 TYY.MMM.-.#####
 ```
 
-This produces invoice numbers like `26.MAY.-00001`, where `26` is the two-digit year and `MAY` is the three-letter month, both derived from the invoice's **posting date**.
+This produces invoice numbers like:
+
+```text
+26.MAY.-00001
+```
+
+Where:
+- `TYY` = two-digit year from the posting date
+- `MMM` = three-letter uppercase month from the posting date
 
 ---
 
-## How the variables work
+## Variables
 
 | Variable | Resolves to | Example |
 |---|---|---|
 | `TYY` | Two-digit year from posting date | `26` |
 | `MMM` | Three-letter uppercase month from posting date | `MAY` |
 
-These are custom variables registered by the app in `hooks.py`. Standard ERPNext variables like `YYYY` and `.####` also work alongside them.
+These custom variables work alongside normal ERPNext naming series parts.
 
 ---
 
-## Changing the series
-
-If you need a different format:
+## How to configure
 
 1. Go to **Settings → Naming Series**
-2. Select **Sales Invoice** from the document type dropdown
-3. Add or change the series in the options list
-4. Set the default
+2. Select **Sales Invoice**
+3. Add the series you want to use
+4. Save and test the preview
 
 ![Naming Series — Sales Invoice](../images/Naming%20Series%20for%20Sales%20Invoice.png)
 
-The standard ERPNext format `SINV-.YYYY.-` is included as an alternative option.
+If needed, you can keep ERPNext’s standard series as an alternative.
+
+---
+
+## Practical note
+
+If your production format needs a slightly different output, such as a different separator style, update the naming series options before rollout and test the generated preview names first.
 
 ---
 

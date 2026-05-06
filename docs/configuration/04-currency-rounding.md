@@ -1,38 +1,49 @@
 # Currency & Rounding
 
-Sri Lankan Rupees (LKR) do not use cent values in practice. This page explains how to configure ERPNext to display LKR amounts as whole numbers.
+This app does **not** force a global currency precision change for LKR. Instead, invoice rounding is handled using ERPNext’s rounded total behaviour together with a company round-off account.
 
 ---
 
-## Enable rounding on Sales Invoice
+## Rounded total on invoices
 
-ERPNext has a built-in **Round Off** option on Sales Invoice that rounds the grand total to the nearest whole rupee.
-
-To round automatically:
-
-1. Open a Sales Invoice
-2. In the **Totals** section, tick **Round Off**
-3. The **Rounding Adjustment** row will appear and the **Rounded Total** will be a whole number
+On Sales Invoices, ERPNext can round the final total and store the difference as a rounding adjustment.
 
 ![Global settings — rounded total](../images/Global%20settings%20rounded%20total.png)
 
-> The Tax Invoice print format uses `doc.rounded_total` when available, falling back to `doc.grand_total`. Enabling Round Off ensures the printed total is always a whole rupee.
+A submitted Sales Invoice can therefore show:
+- **Grand Total**
+- **Rounding Adjustment**
+- **Rounded Total**
+
+This is useful when the printed invoice should show a cleaner payable figure.
 
 ---
 
-## Set up rounding accounts on the company
+## Company round-off setup
 
-For the rounding adjustment to post correctly to the General Ledger, assign a rounding account on the company record:
+To ensure the rounding difference posts correctly, set a round-off account in the Company record.
 
 ![Company — setting up rounded-off accounts](../images/Setting%20up%20rounded%20off%20accounts%20in%20company.png)
 
-1. Open your **Company** record
-2. Scroll to the **Accounts** section
-3. Set **Round Off Account** to an appropriate income/expense account (typically a small rounding difference account)
-4. Save
+Recommended steps:
+1. Open the **Company** record
+2. Go to the **Accounts** tab
+3. Set **Round Off Account**
+4. Set **Round Off Cost Center** if required
+5. Save
+
+---
+
+## Important note
+
+This approach is intentionally limited to **invoice rounding**. It avoids changing global currency precision, which could affect other transactions that still need decimals.
 
 ---
 
 ## Result
 
-After these steps, all LKR amounts on invoices, reports, and the Tax Invoice print format display as whole rupees without a decimal separator.
+When combined with the Tax Invoice print format, rounded totals help produce a cleaner payable amount on invoices while keeping ERPNext accounting entries balanced through the round-off account.
+
+---
+
+> Next: [WHT Categories](05-wht-categories.md)

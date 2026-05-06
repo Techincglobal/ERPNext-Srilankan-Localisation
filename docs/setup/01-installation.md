@@ -19,40 +19,37 @@ bench get-app https://github.com/Techincglobal/erpnext_srilankan_localisation --
 bench --site <your-site> install-app erpnext_srilankan_localisation
 ```
 
-The install script will automatically:
-- Copy the Sri Lanka Chart of Accounts into ERPNext
-- Create custom fields on Company, Customer, Supplier, Sales Invoice, and Purchase Invoice
-- Set up the Sri Lanka naming series on Sales Invoice
-- Create standard payment methods (Credit/Debit Card, Mobile Payment, Online Payment)
-- Create tax categories, tax templates, and WHT categories for any existing Sri Lankan companies
+The install flow sets up:
+- Sri Lanka chart of accounts support
+- custom fields on Company, Customer, and Supplier
+- fetched invoice fields for customer TIN and VAT
+- tax categories
+- sales and purchase tax templates
+- LK Tax Settings
+- naming series support
+- withholding tax categories
 
-### 3. Run the setup wizard
+### 3. Run the setup wizard for a new site
 
-If setting up a new site, run the ERPNext setup wizard and select **Sri Lanka** as the company country.
-
-![Setup wizard — company setup page](../images/Setup%20wizard%20-%20company%20setup%20page.png)
-
-Select **Sri Lanka** from the country dropdown:
+When creating a new site, select **Sri Lanka** in the setup wizard.
 
 ![Setup wizard — Sri Lanka selected](../images/Setup%20wizard%20-%20Sri%20Lanka%20selected.png)
 
-The Sri Lanka Chart of Accounts will be available automatically:
+During company setup, select the **Sri Lanka - Standard Chart of Accounts**.
 
 ![Setup wizard — Sri Lanka Chart of Accounts visible](../images/Setup%20wizard%20-%20Sri%20Lanka%20CoA%20visible.png)
 
-The app hooks into the wizard to:
-- Remove ERPNext's generic "Sri Lanka Tax" account and template
-- Create the full set of Sri Lankan tax templates automatically
+![Setup wizard — company setup page](../images/Setup%20wizard%20-%20company%20setup%20page.png)
 
-### 4. For existing sites
+### 4. Existing sites
 
-If you are installing on a site that already has a Sri Lankan company, run migrate after install:
+If you install on an existing Sri Lankan site, run migrate after install:
 
 ```bash
 bench --site <your-site> migrate
 ```
 
-This re-runs the full setup for all Sri Lankan companies found on the site — it is safe to run multiple times.
+This is useful when you need setup patches and fixtures to be applied again safely.
 
 ---
 

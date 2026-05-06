@@ -1,42 +1,44 @@
 # Company Setup
 
-After installation, open your company record and fill in the Sri Lanka tax registration fields. These appear in the **Tax Registration** section.
+After installation, open the Company record and complete the Sri Lanka-specific tax registration fields.
 
 ![Company — Tax Registration fields](../images/Company%20tax%20registration%20fields.png)
 
 ---
 
-## Fields
-
-### Business Registration
+## Tax registration fields
 
 | Field | Description |
 |---|---|
 | **BRC No** | Business Registration Certificate number |
-| **TIN Registration No** | Inland Revenue Department TIN |
-
-### Tax Registration
-
-| Field | Description |
-|---|---|
-| **SSCL Registered** | Tick if the company is registered for SSCL |
-| **SSCL Registration No** | Appears when SSCL Registered is ticked |
-| **VAT Registered** | Tick if the company is registered for VAT |
-| **VAT No** | Appears when VAT Registered is ticked |
-| **VAT Registration Certificate** | Attach the IRD certificate (optional) |
+| **TIN Registration No** | IRD-issued TIN |
+| **SSCL Registered** | Indicates whether the company is registered for SSCL |
+| **SSCL Registration No** | SSCL registration number |
+| **VAT Registered** | Indicates whether the company is VAT registered |
+| **VAT No** | VAT registration number |
+| **VAT Registration Certificate** | Supporting certificate attachment |
 
 ---
 
-## How to fill in
+## Steps
 
-1. Go to **Accounting → Company** (or search for your company)
-2. Scroll to the **Tax Registration** section
-3. Enter your **BRC No** and **TIN Registration No**
-4. If registered for SSCL, tick **SSCL Registered** and enter the registration number
-5. If VAT registered, tick **VAT Registered**, enter the **VAT No**, and attach the certificate
-6. Save
+1. Open the **Company** record
+2. Scroll to **Tax Registration**
+3. Enter **BRC No** and **TIN Registration No**
+4. Tick **SSCL Registered** and enter the SSCL number, if applicable
+5. Tick **VAT Registered** and enter the VAT number
+6. Attach the VAT registration certificate if available
+7. Save
 
-> The TIN entered here is printed on the Tax Invoice as the **Supplier's TIN**.
+---
+
+## Round-off account setup
+
+After tax registration, set the company round-off account in the **Accounts** tab.
+
+![Company — setting up rounded-off accounts](../images/Setting%20up%20rounded%20off%20accounts%20in%20company.png)
+
+This supports invoice rounding adjustments when rounded totals are used.
 
 ---
 
