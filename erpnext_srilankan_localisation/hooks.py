@@ -151,6 +151,9 @@ doc_events = {
 	"Company": {
 		"after_insert": "erpnext_srilankan_localisation.overrides.company.after_insert",
 	},
+	"Sales Invoice": {
+		"before_submit": "erpnext_srilankan_localisation.overrides.validations.validate_sales_invoice",
+	},
 }
 
 naming_series_variables = {
