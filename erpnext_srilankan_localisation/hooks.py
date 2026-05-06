@@ -14,6 +14,13 @@ fixtures = [
 	{"dt": "Print Format", "filters": [["name", "=", "Tax Invoice - LK"]]},
 ]
 
+jinja = {
+	"methods": [
+		"erpnext_srilankan_localisation.utils.jinja.get_address_display",
+		"erpnext_srilankan_localisation.utils.jinja.get_contact_number_from_contact",
+	]
+}
+
 
 
 # Each item in the list will be shown as an app in the apps page
