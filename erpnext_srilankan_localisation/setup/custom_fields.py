@@ -3,10 +3,17 @@ MODULE = "Erpnext Srilankan Localisation"
 CUSTOM_FIELDS = {
 	"Customer": [
 		{
+			"fieldname": "lk_section_tax_registration",
+			"label": "Tax Registration",
+			"fieldtype": "Section Break",
+			"insert_after": "tax_tab",
+			"module": MODULE,
+		},
+		{
 			"fieldname": "lk_brc_no",
 			"label": "BRC No",
 			"fieldtype": "Data",
-			"insert_after": "tax_id",
+			"insert_after": "lk_section_tax_registration",
 			"depends_on": "eval:doc.customer_type!='Individual'",
 			"module": MODULE,
 		},
@@ -19,10 +26,16 @@ CUSTOM_FIELDS = {
 			"module": MODULE,
 		},
 		{
+			"fieldname": "lk_col_break_tax",
+			"fieldtype": "Column Break",
+			"insert_after": "lk_tin_no",
+			"module": MODULE,
+		},
+		{
 			"fieldname": "lk_is_vat_registered",
 			"label": "VAT Registered",
 			"fieldtype": "Check",
-			"insert_after": "lk_tin_no",
+			"insert_after": "lk_col_break_tax",
 			"default": "0",
 			"module": MODULE,
 		},
@@ -45,10 +58,17 @@ CUSTOM_FIELDS = {
 	],
 	"Supplier": [
 		{
+			"fieldname": "lk_section_tax_registration",
+			"label": "Tax Registration",
+			"fieldtype": "Section Break",
+			"insert_after": "tax_tab",
+			"module": MODULE,
+		},
+		{
 			"fieldname": "lk_brc_no",
 			"label": "BRC No",
 			"fieldtype": "Data",
-			"insert_after": "supplier_group",
+			"insert_after": "lk_section_tax_registration",
 			"depends_on": "eval:doc.supplier_type!='Individual'",
 			"module": MODULE,
 		},
@@ -61,10 +81,16 @@ CUSTOM_FIELDS = {
 			"module": MODULE,
 		},
 		{
+			"fieldname": "lk_col_break_tax",
+			"fieldtype": "Column Break",
+			"insert_after": "lk_tin_no",
+			"module": MODULE,
+		},
+		{
 			"fieldname": "lk_is_vat_registered",
 			"label": "VAT Registered",
 			"fieldtype": "Check",
-			"insert_after": "lk_tin_no",
+			"insert_after": "lk_col_break_tax",
 			"default": "0",
 			"module": MODULE,
 		},
@@ -86,11 +112,19 @@ CUSTOM_FIELDS = {
 		},
 	],
 	"Company": [
+		# Tax Registration section — left: BRC / TIN, right: SSCL
+		{
+			"fieldname": "lk_section_tax_registration",
+			"label": "Tax Registration",
+			"fieldtype": "Section Break",
+			"insert_after": "reporting_currency",
+			"module": MODULE,
+		},
 		{
 			"fieldname": "lk_brc_no",
 			"label": "BRC No",
 			"fieldtype": "Data",
-			"insert_after": "tax_id",
+			"insert_after": "lk_section_tax_registration",
 			"module": MODULE,
 		},
 		{
@@ -101,10 +135,32 @@ CUSTOM_FIELDS = {
 			"module": MODULE,
 		},
 		{
+			"fieldname": "lk_col_break_tax",
+			"fieldtype": "Column Break",
+			"insert_after": "lk_tin_no",
+			"module": MODULE,
+		},
+		{
+			"fieldname": "lk_is_sscl_registered",
+			"label": "SSCL Registered",
+			"fieldtype": "Check",
+			"insert_after": "lk_col_break_tax",
+			"default": "0",
+			"module": MODULE,
+		},
+		{
+			"fieldname": "lk_sscl_no",
+			"label": "SSCL Registration No",
+			"fieldtype": "Data",
+			"insert_after": "lk_is_sscl_registered",
+			"depends_on": "eval:doc.lk_is_sscl_registered==1",
+			"module": MODULE,
+		},
+		{
 			"fieldname": "lk_is_vat_registered",
 			"label": "VAT Registered",
 			"fieldtype": "Check",
-			"insert_after": "lk_tin_no",
+			"insert_after": "lk_sscl_no",
 			"default": "0",
 			"module": MODULE,
 		},
@@ -124,22 +180,6 @@ CUSTOM_FIELDS = {
 			"depends_on": "eval:doc.lk_is_vat_registered==1",
 			"module": MODULE,
 		},
-		{
-			"fieldname": "lk_is_sscl_registered",
-			"label": "SSCL Registered",
-			"fieldtype": "Check",
-			"insert_after": "lk_vat_registration_certificate",
-			"default": "0",
-			"module": MODULE,
-		},
-		{
-			"fieldname": "lk_sscl_no",
-			"label": "SSCL Registration No",
-			"fieldtype": "Data",
-			"insert_after": "lk_is_sscl_registered",
-			"depends_on": "eval:doc.lk_is_sscl_registered==1",
-			"module": MODULE,
-		},
 	],
 	"Sales Invoice": [
 		{
@@ -148,7 +188,6 @@ CUSTOM_FIELDS = {
 			"fieldtype": "Link",
 			"options": "Mode of Payment",
 			"insert_after": "due_date",
-			"reqd": 1,
 			"module": MODULE,
 		},
 		{

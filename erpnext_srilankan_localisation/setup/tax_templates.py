@@ -3,17 +3,45 @@ from frappe.desk.page.setup_wizard.setup_wizard import make_records
 
 TAX_CATEGORIES = [
 	"Sales VAT 18%",
-	"Purchase VAT 18%",
 	"Sales VAT + SSCL",
+	"NON VAT - Sales",
+	"Purchase VAT 18%",
 	"Purchase VAT + SSCL",
-	"Non VAT",
 	"NON VAT - Purchase",
-	"VAT Exempt",
 	"SVAT",
 	"SSCL",
-	"SUSPENDED TAX",
-	"TAX INVOICE",
+	"SUSPENDED TAX"
 ]
+
+
+def remove_erpnext_default_setup(company: str):
+	"""
+	Remove the generic Sri Lanka tax setup ERPNext auto-creates from country_wise_tax.json:
+	  - 'Sri Lanka Tax' sales and purchase templates
+	  - 'VAT' account (leaf, tax_rate=12)
+	  - 'Duties and Taxes' group account (only if it has no remaining children)
+
+	Templates are deleted first because they reference the VAT account.
+	"""
+	for doctype in ("Sales Taxes and Charges Template", "Purchase Taxes and Charges Template"):
+		for name in frappe.get_all(doctype, filters={"company": company, "title": "Sri Lanka Tax"}, pluck="name"):
+			frappe.delete_doc(doctype, name, ignore_permissions=True, force=True)
+
+	vat_account = frappe.db.get_value(
+		"Account",
+		{"account_name": "VAT", "company": company, "tax_rate": 12, "is_group": 0},
+		"name",
+	)
+	if vat_account:
+		frappe.delete_doc("Account", vat_account, ignore_permissions=True, force=True)
+
+	duties_account = frappe.db.get_value(
+		"Account",
+		{"account_name": "Duties and Taxes", "company": company, "is_group": 1},
+		"name",
+	)
+	if duties_account and not frappe.db.exists("Account", {"parent_account": duties_account}):
+		frappe.delete_doc("Account", duties_account, ignore_permissions=True, force=True)
 
 
 def create_sri_lanka_tax_setup(company: str):
@@ -119,25 +147,8 @@ def create_sales_tax_templates(company: str, abbr: str):
 			],
 		},
 		{
-			"title": "TAX INVOICE",
-			"tax_category": "TAX INVOICE",
-			"taxes": [
-				{
-					"charge_type": "On Net Total",
-					"account_head": vat_payable,
-					"rate": 18.0,
-					"description": "VAT 18%",
-				}
-			],
-		},
-		{
-			"title": "Non VAT Sales",
-			"tax_category": "Non VAT",
-			"taxes": [],
-		},
-		{
-			"title": "VAT Exempt Sales",
-			"tax_category": "VAT Exempt",
+			"title": "NON VAT - Sales",
+			"tax_category": "NON VAT - Sales",
 			"taxes": [],
 		},
 	]
