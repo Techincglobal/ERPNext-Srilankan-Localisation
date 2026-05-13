@@ -4,18 +4,15 @@
 from unittest.mock import patch
 
 import frappe
-from frappe.tests import IntegrationTestCase
+from frappe.tests.utils import FrappeTestCase
 from frappe.utils import now_datetime
 
 from erpnext_srilankan_localisation.overrides.validations import validate_sales_invoice
 from erpnext_srilankan_localisation.utils.jinja import get_address_display
 from erpnext_srilankan_localisation.utils.naming import parse_naming_series_variable
 
-EXTRA_TEST_RECORD_DEPENDENCIES = []
-IGNORE_TEST_RECORD_DEPENDENCIES = []
 
-
-class IntegrationTestLKTaxSettings(IntegrationTestCase):
+class IntegrationTestLKTaxSettings(FrappeTestCase):
 
 	def setUp(self):
 		self.settings = frappe.get_single("LK Tax Settings")
