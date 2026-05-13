@@ -19,12 +19,14 @@ Sri Lankan localisation for ERPNext, built and maintained by [TechInc Global](ht
 
 ## Requirements
 
-- ERPNext v15
+- ERPNext v16 or later
+- Frappe v16 or later
+- Python 3.14+
 
 ## Installation
 
 ```bash
-bench get-app https://github.com/Techincglobal/erpnext_srilankan_localisation --branch develop
+bench get-app https://github.com/Techincglobal/erpnext_srilankan_localisation --branch main
 bench --site <your-site> install-app erpnext_srilankan_localisation
 ```
 
