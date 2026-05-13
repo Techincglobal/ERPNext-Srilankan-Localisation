@@ -3,13 +3,13 @@ name: CI
 on:
   push:
     branches:
-      - main
-      - APIT
+      - develop
+      - version-16
 
   pull_request:
     branches:
-      - main
-      - APIT
+      - develop
+      - version-16
 
 concurrency:
   group: ci-erpnext_srilankan_localisation-${{ github.event.number || github.ref }}
