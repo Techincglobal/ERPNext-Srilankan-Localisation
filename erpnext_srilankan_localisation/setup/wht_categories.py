@@ -71,6 +71,9 @@ def create_wht_categories():
 
 
 def _create_wht_category(cat: dict, fiscal_years: list, wht_accounts: dict):
+	if not fiscal_years or not wht_accounts:
+		return
+
 	doc = frappe.get_doc(
 		{
 			"doctype": "Tax Withholding Category",
