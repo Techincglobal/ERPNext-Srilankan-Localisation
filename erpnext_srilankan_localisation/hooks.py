@@ -100,13 +100,12 @@ jinja = {
 
 # before_install = "erpnext_srilankan_localisation.install.before_install"
 after_install = "erpnext_srilankan_localisation.install.after_install"
-after_migrate = "erpnext_srilankan_localisation.migrate.after_migrate"
 setup_wizard_complete = "erpnext_srilankan_localisation.install.after_setup_wizard"
 
 # Uninstallation
 # ------------
 
-before_uninstall = "erpnext_srilankan_localisation.uninstall.before_uninstall"
+# before_uninstall = "erpnext_srilankan_localisation.uninstall.before_uninstall"
 
 # after_uninstall = "erpnext_srilankan_localisation.uninstall.after_uninstall"
 
