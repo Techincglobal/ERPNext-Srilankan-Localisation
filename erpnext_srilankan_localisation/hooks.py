@@ -158,6 +158,7 @@ doc_events = {
 		"after_insert": "erpnext_srilankan_localisation.overrides.company.after_insert",
 	},
 	"Sales Invoice": {
+		"autoname": "erpnext_srilankan_localisation.utils.naming.autoname_with_annual_sequence",
 		"before_submit": "erpnext_srilankan_localisation.overrides.validations.validate_sales_invoice",
 	},
 }
@@ -165,6 +166,7 @@ doc_events = {
 naming_series_variables = {
 	"TYY": "erpnext_srilankan_localisation.utils.naming.parse_naming_series_variable",
 	"MMM": "erpnext_srilankan_localisation.utils.naming.parse_naming_series_variable",
+	"TYYYY": "erpnext_srilankan_localisation.utils.naming.parse_naming_series_variable",
 }
 
 
