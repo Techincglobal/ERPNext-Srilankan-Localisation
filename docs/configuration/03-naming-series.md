@@ -72,6 +72,8 @@ Counter values are **never decremented** when a document is deleted or cancelled
 3. The naming series options field shows the available series — edit if needed.
 4. Save.
 
+![Naming Series — Sales Invoice](../images/Naming%20Series%20for%20Sales%20Invoice.png)
+
 ---
 
 > Next: [Currency & Rounding](04-currency-rounding.md)
