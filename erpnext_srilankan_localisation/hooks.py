@@ -4,6 +4,7 @@ app_publisher = "servers@techincglobal.com"
 app_description = "Sri Lankan Localisation for ERPNext"
 app_email = "servers@techincglobal.com"
 app_license = "mit"
+app_logo_url = "/assets/erpnext_srilankan_localisation/images/erpnext-srilankan-localisation-logo.svg"
 
 # Apps
 # ------------------
