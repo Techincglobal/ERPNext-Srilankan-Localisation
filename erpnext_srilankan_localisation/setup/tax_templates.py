@@ -50,17 +50,27 @@ def remove_erpnext_default_setup(company: str):
 		frappe.delete_doc("Account", duties_account, ignore_permissions=True, force=True)
 
 
-def create_sri_lanka_tax_setup(company: str):
+def create_sri_lanka_tax_setup(company: str) -> bool:
+	"""One-time base setup: VAT and Non-VAT tax categories/templates.
+
+	Returns True once this has actually completed (the company has the LK
+	chart of accounts) - the caller uses this to mark the company as done so
+	a later, unrelated save of the company doesn't re-run this and resurrect
+	a template/category the user deliberately deleted. SSCL templates are
+	handled separately (see sync_sscl_sales_templates) since SSCL
+	registration/category can genuinely change after this has run once.
+	"""
 	abbr = frappe.get_cached_value("Company", company, "abbr")
 
 	create_tax_categories()
 
 	if not _has_required_accounts(company):
-		return
+		return False
 
 	remove_erpnext_default_setup(company)
 	create_sales_tax_templates(company, abbr)
 	create_purchase_tax_templates(company, abbr)
+	return True
 
 
 def _has_required_accounts(company: str) -> bool:
@@ -94,9 +104,10 @@ def _get_effective_sscl_rate(company: str) -> float | None:
 
 
 def create_sales_tax_templates(company: str, abbr: str):
+	"""Base sales templates only (VAT, Non VAT) - part of the one-time setup.
+	SSCL templates are handled separately by sync_sscl_sales_templates.
+	"""
 	vat_payable = _get_account("VAT Payable", company)
-	sscl_payable = _get_account("SSCL Payable", company)
-	sscl_rate = _get_effective_sscl_rate(company)
 
 	templates = [
 		{
@@ -118,42 +129,56 @@ def create_sales_tax_templates(company: str, abbr: str):
 		},
 	]
 
-	if sscl_rate is not None:
-		templates.append(
-			{
-				"title": "Sales - VAT + SSCL",
-				"tax_category": "Sales - VAT + SSCL",
-				"taxes": [
-					{
-						"charge_type": "On Net Total",
-						"account_head": sscl_payable,
-						"rate": sscl_rate,
-						"description": f"SSCL {sscl_rate}%",
-					},
-					{
-						"charge_type": "On Previous Row Total",
-						"account_head": vat_payable,
-						"rate": 18.0,
-						"row_id": 1,
-						"description": "VAT 18%",
-					},
-				],
-			}
-		)
-		templates.append(
-			{
-				"title": "Sales - SSCL",
-				"tax_category": "Sales - SSCL",
-				"taxes": [
-					{
-						"charge_type": "On Net Total",
-						"account_head": sscl_payable,
-						"rate": sscl_rate,
-						"description": f"SSCL {sscl_rate}%",
-					}
-				],
-			}
-		)
+	_insert_sales_templates(templates, company)
+
+
+def sync_sscl_sales_templates(company: str):
+	"""Create the SSCL sales templates if the company is SSCL registered
+	with a declared business category. Unlike create_sri_lanka_tax_setup,
+	this is meant to be called on every Company save (not gated behind a
+	one-time-setup flag), since SSCL registration/category can genuinely
+	change after the company's base setup has already run once.
+	"""
+	sscl_rate = _get_effective_sscl_rate(company)
+	if sscl_rate is None:
+		return
+
+	vat_payable = _get_account("VAT Payable", company)
+	sscl_payable = _get_account("SSCL Payable", company)
+
+	templates = [
+		{
+			"title": "Sales - VAT + SSCL",
+			"tax_category": "Sales - VAT + SSCL",
+			"taxes": [
+				{
+					"charge_type": "On Net Total",
+					"account_head": sscl_payable,
+					"rate": sscl_rate,
+					"description": f"SSCL {sscl_rate}%",
+				},
+				{
+					"charge_type": "On Previous Row Total",
+					"account_head": vat_payable,
+					"rate": 18.0,
+					"row_id": 1,
+					"description": "VAT 18%",
+				},
+			],
+		},
+		{
+			"title": "Sales - SSCL",
+			"tax_category": "Sales - SSCL",
+			"taxes": [
+				{
+					"charge_type": "On Net Total",
+					"account_head": sscl_payable,
+					"rate": sscl_rate,
+					"description": f"SSCL {sscl_rate}%",
+				}
+			],
+		},
+	]
 
 	_insert_sales_templates(templates, company)
 

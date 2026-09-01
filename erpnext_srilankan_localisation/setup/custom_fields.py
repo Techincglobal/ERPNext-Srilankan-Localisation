@@ -189,6 +189,17 @@ CUSTOM_FIELDS = {
 			"depends_on": "eval:doc.lk_is_vat_registered==1",
 			"module": MODULE,
 		},
+		{
+			"fieldname": "lk_tax_setup_completed",
+			"label": "LK Tax Setup Completed",
+			"fieldtype": "Check",
+			"insert_after": "lk_vat_registration_certificate",
+			"default": "0",
+			"hidden": 1,
+			"read_only": 1,
+			"description": "Internal flag - set once the base VAT/Non-VAT tax setup has run, so a later save doesn't recreate a template/category you deliberately removed.",
+			"module": MODULE,
+		},
 	],
 	"Sales Invoice": [
 		{
