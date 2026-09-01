@@ -2,16 +2,22 @@ import frappe
 from frappe.desk.page.setup_wizard.setup_wizard import make_records
 
 TAX_CATEGORIES = [
-	"Sales VAT 18%",
-	"Sales VAT + SSCL",
-	"NON VAT - Sales",
-	"Purchase VAT 18%",
-	"Purchase VAT + SSCL",
-	"NON VAT - Purchase",
-	"SVAT",
-	"SSCL",
-	"SUSPENDED TAX"
+	"Sales - VAT",
+	"Sales - VAT + SSCL",
+	"Sales - Non VAT",
+	"Sales - SSCL",
+	"Purchase - VAT",
+	"Purchase - Non VAT",
 ]
+
+SSCL_LIABLE_TURNOVER_PCT = {
+	"Importation": 100,
+	"Manufacturing": 85,
+	"General Services": 100,
+	"Registered Distributor": 25,
+	"Other Wholesale or Retail": 50,
+}
+SSCL_STATUTORY_RATE = 2.5
 
 
 def remove_erpnext_default_setup(company: str):
@@ -52,6 +58,7 @@ def create_sri_lanka_tax_setup(company: str):
 	if not _has_required_accounts(company):
 		return
 
+	remove_erpnext_default_setup(company)
 	create_sales_tax_templates(company, abbr)
 	create_purchase_tax_templates(company, abbr)
 
@@ -72,15 +79,29 @@ def create_tax_categories():
 	make_records([{"doctype": "Tax Category", "title": title} for title in TAX_CATEGORIES])
 
 
+def _get_effective_sscl_rate(company: str) -> float | None:
+	is_registered, category = frappe.db.get_value(
+		"Company", company, ["lk_is_sscl_registered", "lk_sscl_business_category"]
+	)
+	if not is_registered or not category:
+		return None
+
+	liable_pct = SSCL_LIABLE_TURNOVER_PCT.get(category)
+	if not liable_pct:
+		return None
+
+	return round(SSCL_STATUTORY_RATE * liable_pct / 100, 4)
+
+
 def create_sales_tax_templates(company: str, abbr: str):
 	vat_payable = _get_account("VAT Payable", company)
 	sscl_payable = _get_account("SSCL Payable", company)
-	svat_suspense = _get_account("SVAT Suspense", company)
+	sscl_rate = _get_effective_sscl_rate(company)
 
 	templates = [
 		{
-			"title": "Sales VAT 18%",
-			"tax_category": "Sales VAT 18%",
+			"title": "Sales - VAT",
+			"tax_category": "Sales - VAT",
 			"taxes": [
 				{
 					"charge_type": "On Net Total",
@@ -91,79 +112,59 @@ def create_sales_tax_templates(company: str, abbr: str):
 			],
 		},
 		{
-			"title": "Sales VAT + SSCL",
-			"tax_category": "Sales VAT + SSCL",
-			"taxes": [
-				{
-					"charge_type": "On Net Total",
-					"account_head": sscl_payable,
-					"rate": 2.5,
-					"description": "SSCL 2.5%",
-				},
-				{
-					"charge_type": "On Previous Row Total",
-					"account_head": vat_payable,
-					"rate": 18.0,
-					"row_id": 1,
-					"description": "VAT 18%",
-				},
-			],
-		},
-		{
-			"title": "SSCL",
-			"tax_category": "SSCL",
-			"taxes": [
-				{
-					"charge_type": "On Net Total",
-					"account_head": sscl_payable,
-					"rate": 2.5,
-					"description": "SSCL 2.5%",
-				}
-			],
-		},
-		{
-			"title": "SVAT",
-			"tax_category": "SVAT",
-			"taxes": [
-				{
-					"charge_type": "On Net Total",
-					"account_head": svat_suspense,
-					"rate": 18.0,
-					"description": "SVAT Suspense",
-					"included_in_print_rate": 1,
-				}
-			],
-		},
-		{
-			"title": "SUSPENDED TAX",
-			"tax_category": "SUSPENDED TAX",
-			"taxes": [
-				{
-					"charge_type": "On Net Total",
-					"account_head": vat_payable,
-					"rate": 18.0,
-					"description": "Suspended Tax",
-				}
-			],
-		},
-		{
-			"title": "NON VAT - Sales",
-			"tax_category": "NON VAT - Sales",
+			"title": "Sales - Non VAT",
+			"tax_category": "Sales - Non VAT",
 			"taxes": [],
 		},
 	]
+
+	if sscl_rate is not None:
+		templates.append(
+			{
+				"title": "Sales - VAT + SSCL",
+				"tax_category": "Sales - VAT + SSCL",
+				"taxes": [
+					{
+						"charge_type": "On Net Total",
+						"account_head": sscl_payable,
+						"rate": sscl_rate,
+						"description": f"SSCL {sscl_rate}%",
+					},
+					{
+						"charge_type": "On Previous Row Total",
+						"account_head": vat_payable,
+						"rate": 18.0,
+						"row_id": 1,
+						"description": "VAT 18%",
+					},
+				],
+			}
+		)
+		templates.append(
+			{
+				"title": "Sales - SSCL",
+				"tax_category": "Sales - SSCL",
+				"taxes": [
+					{
+						"charge_type": "On Net Total",
+						"account_head": sscl_payable,
+						"rate": sscl_rate,
+						"description": f"SSCL {sscl_rate}%",
+					}
+				],
+			}
+		)
 
 	_insert_sales_templates(templates, company)
 
 
 def create_purchase_tax_templates(company: str, abbr: str):
 	vat_receivable = _get_account("VAT Receivable", company)
-	sscl_payable = _get_account("SSCL Payable", company)
 
 	templates = [
 		{
-			"title": "Purchase VAT 18%",
-			"tax_category": "Purchase VAT 18%",
+			"title": "Purchase - VAT",
+			"tax_category": "Purchase - VAT",
 			"taxes": [
 				{
 					"charge_type": "On Net Total",
@@ -174,27 +175,8 @@ def create_purchase_tax_templates(company: str, abbr: str):
 			],
 		},
 		{
-			"title": "Purchase VAT + SSCL",
-			"tax_category": "Purchase VAT + SSCL",
-			"taxes": [
-				{
-					"charge_type": "On Net Total",
-					"account_head": sscl_payable,
-					"rate": 2.5,
-					"description": "SSCL 2.5%",
-				},
-				{
-					"charge_type": "On Previous Row Total",
-					"account_head": vat_receivable,
-					"rate": 18.0,
-					"row_id": 1,
-					"description": "VAT 18%",
-				},
-			],
-		},
-		{
-			"title": "Non VAT Purchase",
-			"tax_category": "NON VAT - Purchase",
+			"title": "Purchase - Non VAT",
+			"tax_category": "Purchase - Non VAT",
 			"taxes": [],
 		},
 	]
