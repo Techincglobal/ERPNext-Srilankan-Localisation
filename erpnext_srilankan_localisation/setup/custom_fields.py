@@ -112,7 +112,6 @@ CUSTOM_FIELDS = {
 		},
 	],
 	"Company": [
-		# Tax Registration section — left: BRC / TIN, right: SSCL
 		{
 			"fieldname": "lk_section_tax_registration",
 			"label": "Tax Registration",
@@ -154,6 +153,16 @@ CUSTOM_FIELDS = {
 			"fieldtype": "Data",
 			"insert_after": "lk_is_sscl_registered",
 			"depends_on": "eval:doc.lk_is_sscl_registered==1",
+			"module": MODULE,
+		},
+		{
+			"fieldname": "lk_sscl_business_category",
+			"label": "SSCL Business Category",
+			"fieldtype": "Select",
+			"options": "\nImportation\nManufacturing\nGeneral Services\nRegistered Distributor\nOther Wholesale or Retail",
+			"insert_after": "lk_sscl_no",
+			"depends_on": "eval:doc.lk_is_sscl_registered==1",
+			"description": "Determines the % of turnover liable for SSCL - see IRD guidance.",
 			"module": MODULE,
 		},
 		{
