@@ -22,7 +22,7 @@ CUSTOM_FIELDS = {
 			"label": "TIN Registration No",
 			"fieldtype": "Data",
 			"insert_after": "lk_brc_no",
-			"depends_on": "eval:doc.customer_type!='Individual'",
+			"depends_on": "",
 			"module": MODULE,
 		},
 		{
@@ -77,7 +77,7 @@ CUSTOM_FIELDS = {
 			"label": "TIN Registration No",
 			"fieldtype": "Data",
 			"insert_after": "lk_brc_no",
-			"depends_on": "eval:doc.supplier_type!='Individual'",
+			"depends_on": "",
 			"module": MODULE,
 		},
 		{
@@ -131,6 +131,7 @@ CUSTOM_FIELDS = {
 			"label": "TIN Registration No",
 			"fieldtype": "Data",
 			"insert_after": "lk_brc_no",
+			"depends_on": "",
 			"module": MODULE,
 		},
 		{
@@ -203,11 +204,19 @@ CUSTOM_FIELDS = {
 	],
 	"Sales Invoice": [
 		{
+			"fieldname": "lk_delivery_date",
+			"label": "Date of Delivery",
+			"fieldtype": "Date",
+			"insert_after": "due_date",
+			"allow_on_submit": 1,
+			"module": MODULE,
+		},
+		{
 			"fieldname": "lk_mode_of_payment",
 			"label": "Mode of Payment",
 			"fieldtype": "Link",
 			"options": "Mode of Payment",
-			"insert_after": "due_date",
+			"insert_after": "lk_delivery_date",
 			"module": MODULE,
 		},
 		{
