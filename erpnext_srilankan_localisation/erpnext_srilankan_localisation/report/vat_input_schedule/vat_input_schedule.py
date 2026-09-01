@@ -89,9 +89,9 @@ def _get_data(filters):
 			pi.lk_supplier_tin_no AS supplier_tin,
 			pi.supplier_name,
 			COALESCE(MAX(ptc.net_amount), pi.net_total) * IF(pi.is_return, -1, 1) AS taxable_value,
-			SUM(ptc.tax_amount_after_discount_amount) * IF(pi.is_return, -1, 1) AS vat_amount
+			COALESCE(SUM(ptc.tax_amount_after_discount_amount), 0) * IF(pi.is_return, -1, 1) AS vat_amount
 		FROM `tabPurchase Invoice` pi
-		INNER JOIN `tabPurchase Taxes and Charges` ptc
+		LEFT JOIN `tabPurchase Taxes and Charges` ptc
 			ON  ptc.parent       = pi.name
 			AND ptc.account_head = %(vat_account)s
 		WHERE
