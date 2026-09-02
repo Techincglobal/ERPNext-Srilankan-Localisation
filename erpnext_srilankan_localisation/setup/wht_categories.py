@@ -1,129 +1,123 @@
 import frappe
 
-# Sri Lanka WHT categories (2024-25 rates).
-# single_threshold is per-calendar-month per payee in LKR.
+FAR_FUTURE = "2099-12-31"
+
 WHT_CATEGORIES = [
 	{
-		"name": "WHT - Interest 10%",
-		"rate": 10.0,
-		"single_threshold": 0,
-		"cumulative_threshold": 0,
+		"name": "WHT - Interest or Discount",
+		"rates": [
+			{"from_date": "2023-01-01", "to_date": "2025-03-31", "rate": 5.0},
+			{"from_date": "2025-04-01", "to_date": FAR_FUTURE, "rate": 10.0},
+		],
 	},
 	{
-		"name": "WHT - Service Fees (Resident) 5%",
-		"rate": 5.0,
-		"single_threshold": 100000,
-		"cumulative_threshold": 0,
+		"name": "WHT - Service Fees (Resident Individual)",
+		"rates": [
+			{"from_date": "2023-01-01", "to_date": FAR_FUTURE, "rate": 5.0, "single_threshold": 100000},
+		],
 	},
 	{
-		"name": "WHT - Rent (Resident) 10%",
-		"rate": 10.0,
-		"single_threshold": 100000,
-		"cumulative_threshold": 0,
+		"name": "WHT - Rent (Resident)",
+		"rates": [
+			{"from_date": "2023-01-01", "to_date": FAR_FUTURE, "rate": 10.0, "single_threshold": 100000},
+		],
 	},
 	{
-		"name": "WHT - Rent (Non-Resident) 14%",
-		"rate": 14.0,
-		"single_threshold": 0,
-		"cumulative_threshold": 0,
+		"name": "WHT - Rent (Non-Resident)",
+		"rates": [{"from_date": "2023-01-01", "to_date": FAR_FUTURE, "rate": 14.0}],
 	},
 	{
-		"name": "WHT - Service Fees (Non-Resident) 14%",
-		"rate": 14.0,
-		"single_threshold": 0,
-		"cumulative_threshold": 0,
+		"name": "WHT - Service Fees or Insurance Premium (Non-Resident)",
+		"rates": [{"from_date": "2023-01-01", "to_date": FAR_FUTURE, "rate": 14.0}],
 	},
 	{
-		"name": "WHT - Royalties 14%",
-		"rate": 14.0,
-		"single_threshold": 0,
-		"cumulative_threshold": 0,
+		"name": "WHT - Royalty",
+		"rates": [{"from_date": "2023-01-01", "to_date": FAR_FUTURE, "rate": 14.0}],
 	},
 	{
-		"name": "WHT - Dividends 15%",
-		"rate": 15.0,
-		"single_threshold": 0,
-		"cumulative_threshold": 0,
+		"name": "WHT - Dividend",
+		"rates": [{"from_date": "2023-01-01", "to_date": FAR_FUTURE, "rate": 15.0}],
+	},
+	{
+		"name": "WHT - Charge, Natural Resource Payment or Premium",
+		"rates": [{"from_date": "2023-01-01", "to_date": FAR_FUTURE, "rate": 14.0}],
+	},
+	{
+		"name": "WHT - Non-Resident Transport or Telecom Service",
+		"rates": [{"from_date": "2023-01-01", "to_date": FAR_FUTURE, "rate": 2.0}],
 	},
 ]
 
 
 def create_wht_categories():
-	fiscal_years = frappe.get_all(
-		"Fiscal Year",
-		fields=["year_start_date", "year_end_date"],
-	)
-
 	sl_companies = frappe.get_all("Company", filters={"country": "Sri Lanka"}, pluck="name")
+
 	wht_accounts = {
 		company: frappe.db.get_value(
 			"Account", {"account_name": "WHT Payable", "company": company}, "name"
 		)
 		for company in sl_companies
 	}
-	wht_accounts = {c: a for c, a in wht_accounts.items() if a}
+	wht_accounts = {company: account for company, account in wht_accounts.items() if account}
 
-	for cat in WHT_CATEGORIES:
-		if not frappe.db.exists("Tax Withholding Category", cat["name"]):
-			_create_wht_category(cat, fiscal_years, wht_accounts)
-		else:
-			_update_wht_category(cat, fiscal_years, wht_accounts)
+	for category in WHT_CATEGORIES:
+		_sync_wht_category(category, wht_accounts)
 
 
-def _create_wht_category(cat: dict, fiscal_years: list, wht_accounts: dict):
-	if not fiscal_years or not wht_accounts:
+def _sync_wht_category(category: dict, wht_accounts: dict):
+	name = category["name"]
+	exists = frappe.db.exists("Tax Withholding Category", name)
+
+	if not exists and not wht_accounts:
+		# accounts is a mandatory child table - nothing to create yet since
+		# no Sri Lankan company has a WHT Payable account. Company.on_update()
+		# will call this again once one exists.
 		return
 
-	doc = frappe.get_doc(
-		{
-			"doctype": "Tax Withholding Category",
-			"name": cat["name"],
-			"category_name": cat["name"],
-		}
-	)
-	for fy in fiscal_years:
-		doc.append(
-			"rates",
-			{
-				"from_date": fy.year_start_date,
-				"to_date": fy.year_end_date,
-				"tax_withholding_rate": cat["rate"],
-				"single_threshold": cat["single_threshold"],
-				"cumulative_threshold": cat["cumulative_threshold"],
-			},
-		)
-	for company, account in wht_accounts.items():
-		doc.append("accounts", {"company": company, "account": account})
-	doc.insert(ignore_permissions=True)
+	if exists:
+		doc = frappe.get_doc("Tax Withholding Category", name)
+	else:
+		doc = frappe.new_doc("Tax Withholding Category")
+		doc.name = name
+		doc.category_name = name
+
+	_sync_rates(doc, category["rates"])
+	_sync_accounts(doc, wht_accounts)
+
+	if doc.is_new():
+		doc.insert(ignore_permissions=True)
+	else:
+		doc.save(ignore_permissions=True)
 
 
-def _update_wht_category(cat: dict, fiscal_years: list, wht_accounts: dict):
-	doc = frappe.get_doc("Tax Withholding Category", cat["name"])
-	existing_ranges = {
-		(str(row.from_date), str(row.to_date)) for row in doc.rates
-	}
-	existing_companies = {row.company for row in doc.accounts}
-	changed = False
+def _sync_rates(doc, configured_rates: list):
+	existing = {(str(row.from_date), str(row.to_date)): row for row in doc.rates}
 
-	for fy in fiscal_years:
-		key = (str(fy.year_start_date), str(fy.year_end_date))
-		if key not in existing_ranges:
+	for rate in configured_rates:
+		key = (rate["from_date"], rate["to_date"])
+		if key in existing:
+			row = existing[key]
+			row.tax_withholding_rate = rate["rate"]
+			row.single_threshold = rate.get("single_threshold", 0)
+			row.cumulative_threshold = rate.get("cumulative_threshold", 0)
+		else:
 			doc.append(
 				"rates",
 				{
-					"from_date": fy.year_start_date,
-					"to_date": fy.year_end_date,
-					"tax_withholding_rate": cat["rate"],
-					"single_threshold": cat["single_threshold"],
-					"cumulative_threshold": cat["cumulative_threshold"],
+					"from_date": rate["from_date"],
+					"to_date": rate["to_date"],
+					"tax_withholding_rate": rate["rate"],
+					"single_threshold": rate.get("single_threshold", 0),
+					"cumulative_threshold": rate.get("cumulative_threshold", 0),
 				},
 			)
-			changed = True
+
+
+def _sync_accounts(doc, wht_accounts: dict):
+	existing = {row.company: row for row in doc.accounts}
 
 	for company, account in wht_accounts.items():
-		if company not in existing_companies:
+		if company in existing:
+			existing[company].account = account
+		else:
 			doc.append("accounts", {"company": company, "account": account})
-			changed = True
-
-	if changed:
-		doc.save(ignore_permissions=True)

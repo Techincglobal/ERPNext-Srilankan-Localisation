@@ -89,9 +89,9 @@ def _get_data(filters):
 			si.lk_customer_tin_no AS purchaser_tin,
 			si.customer_name,
 			COALESCE(MAX(stc.net_amount), si.net_total) * IF(si.is_return, -1, 1) AS taxable_value,
-			SUM(stc.tax_amount_after_discount_amount) * IF(si.is_return, -1, 1) AS vat_amount
+			COALESCE(SUM(stc.tax_amount_after_discount_amount), 0) * IF(si.is_return, -1, 1) AS vat_amount
 		FROM `tabSales Invoice` si
-		INNER JOIN `tabSales Taxes and Charges` stc
+		LEFT JOIN `tabSales Taxes and Charges` stc
 			ON  stc.parent       = si.name
 			AND stc.account_head = %(vat_account)s
 		WHERE

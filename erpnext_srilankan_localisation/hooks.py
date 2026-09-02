@@ -160,7 +160,7 @@ doc_events = {
 		"on_trash": "erpnext_srilankan_localisation.utils.naming.revert_annual_sequence_on_delete",
 	},
 	"Company": {
-		"after_insert": "erpnext_srilankan_localisation.overrides.company.after_insert",
+		"on_update": "erpnext_srilankan_localisation.overrides.company.on_update",
 	},
 	"Sales Invoice": {
 		"before_submit": "erpnext_srilankan_localisation.overrides.validations.validate_sales_invoice",

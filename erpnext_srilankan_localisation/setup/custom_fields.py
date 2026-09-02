@@ -22,7 +22,7 @@ CUSTOM_FIELDS = {
 			"label": "TIN Registration No",
 			"fieldtype": "Data",
 			"insert_after": "lk_brc_no",
-			"depends_on": "eval:doc.customer_type!='Individual'",
+			"depends_on": "",
 			"module": MODULE,
 		},
 		{
@@ -77,7 +77,7 @@ CUSTOM_FIELDS = {
 			"label": "TIN Registration No",
 			"fieldtype": "Data",
 			"insert_after": "lk_brc_no",
-			"depends_on": "eval:doc.supplier_type!='Individual'",
+			"depends_on": "",
 			"module": MODULE,
 		},
 		{
@@ -112,7 +112,6 @@ CUSTOM_FIELDS = {
 		},
 	],
 	"Company": [
-		# Tax Registration section — left: BRC / TIN, right: SSCL
 		{
 			"fieldname": "lk_section_tax_registration",
 			"label": "Tax Registration",
@@ -132,6 +131,7 @@ CUSTOM_FIELDS = {
 			"label": "TIN Registration No",
 			"fieldtype": "Data",
 			"insert_after": "lk_brc_no",
+			"depends_on": "",
 			"module": MODULE,
 		},
 		{
@@ -154,6 +154,16 @@ CUSTOM_FIELDS = {
 			"fieldtype": "Data",
 			"insert_after": "lk_is_sscl_registered",
 			"depends_on": "eval:doc.lk_is_sscl_registered==1",
+			"module": MODULE,
+		},
+		{
+			"fieldname": "lk_sscl_business_category",
+			"label": "SSCL Business Category",
+			"fieldtype": "Select",
+			"options": "\nImportation\nManufacturing\nGeneral Services\nRegistered Distributor\nOther Wholesale or Retail",
+			"insert_after": "lk_sscl_no",
+			"depends_on": "eval:doc.lk_is_sscl_registered==1",
+			"description": "Determines the % of turnover liable for SSCL - see IRD guidance.",
 			"module": MODULE,
 		},
 		{
@@ -180,14 +190,33 @@ CUSTOM_FIELDS = {
 			"depends_on": "eval:doc.lk_is_vat_registered==1",
 			"module": MODULE,
 		},
+		{
+			"fieldname": "lk_tax_setup_completed",
+			"label": "LK Tax Setup Completed",
+			"fieldtype": "Check",
+			"insert_after": "lk_vat_registration_certificate",
+			"default": "0",
+			"hidden": 1,
+			"read_only": 1,
+			"description": "Internal flag - set once the base VAT/Non-VAT tax setup has run, so a later save doesn't recreate a template/category you deliberately removed.",
+			"module": MODULE,
+		},
 	],
 	"Sales Invoice": [
+		{
+			"fieldname": "lk_delivery_date",
+			"label": "Date of Delivery",
+			"fieldtype": "Date",
+			"insert_after": "due_date",
+			"allow_on_submit": 1,
+			"module": MODULE,
+		},
 		{
 			"fieldname": "lk_mode_of_payment",
 			"label": "Mode of Payment",
 			"fieldtype": "Link",
 			"options": "Mode of Payment",
-			"insert_after": "due_date",
+			"insert_after": "lk_delivery_date",
 			"module": MODULE,
 		},
 		{
