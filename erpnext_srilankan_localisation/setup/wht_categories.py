@@ -66,8 +66,15 @@ def create_wht_categories():
 
 def _sync_wht_category(category: dict, wht_accounts: dict):
 	name = category["name"]
+	exists = frappe.db.exists("Tax Withholding Category", name)
 
-	if frappe.db.exists("Tax Withholding Category", name):
+	if not exists and not wht_accounts:
+		# accounts is a mandatory child table - nothing to create yet since
+		# no Sri Lankan company has a WHT Payable account. Company.on_update()
+		# will call this again once one exists.
+		return
+
+	if exists:
 		doc = frappe.get_doc("Tax Withholding Category", name)
 	else:
 		doc = frappe.new_doc("Tax Withholding Category")
