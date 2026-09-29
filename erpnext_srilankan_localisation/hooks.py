@@ -1,6 +1,6 @@
 app_name = "erpnext_srilankan_localisation"
 app_title = "Erpnext Srilankan Localisation"
-app_publisher = "servers@techincglobal.com"
+app_publisher = "Techincglobal"
 app_description = "Sri Lankan Localisation for ERPNext"
 app_email = "servers@techincglobal.com"
 app_license = "mit"
