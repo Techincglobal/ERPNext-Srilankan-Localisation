@@ -10,7 +10,7 @@
 ### 1. Get the app
 
 ```bash
-bench get-app https://github.com/Techincglobal/erpnext_srilankan_localisation --branch develop
+bench get-app https://github.com/Techincglobal/ERPNext-Srilankan-Localisation --branch version-16
 ```
 
 ### 2. Install on your site

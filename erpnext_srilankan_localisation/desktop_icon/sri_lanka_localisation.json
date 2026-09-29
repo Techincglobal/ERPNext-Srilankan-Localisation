@@ -1,0 +1,22 @@
+{
+ "app": "erpnext_srilankan_localisation",
+ "creation": "2026-09-29 10:00:00.000000",
+ "docstatus": 0,
+ "doctype": "Desktop Icon",
+ "hidden": 0,
+ "icon": "file-text",
+ "icon_type": "Link",
+ "idx": 50,
+ "label": "Sri Lanka Localisation",
+ "link_to": "Sri Lanka Localisation",
+ "link_type": "Workspace Sidebar",
+ "logo_url": "/assets/erpnext_srilankan_localisation/images/erpnext-srilankan-localisation-logo.svg",
+ "modified": "2026-09-29 10:00:00.000000",
+ "modified_by": "Administrator",
+ "name": "Sri Lanka Localisation",
+ "owner": "Administrator",
+ "parent_icon": "",
+ "restrict_removal": 0,
+ "roles": [],
+ "standard": 1
+}

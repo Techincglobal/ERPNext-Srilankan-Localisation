@@ -25,15 +25,14 @@ jinja = {
 
 
 # Each item in the list will be shown as an app in the apps page
-# add_to_apps_screen = [
-# 	{
-# 		"name": "erpnext_srilankan_localisation",
-# 		"logo": "/assets/erpnext_srilankan_localisation/logo.png",
-# 		"title": "Erpnext Srilankan Localisation",
-# 		"route": "/erpnext_srilankan_localisation",
-# 		"has_permission": "erpnext_srilankan_localisation.api.permission.has_app_permission"
-# 	}
-# ]
+add_to_apps_screen = [
+	{
+		"name": app_name,
+		"logo": app_logo_url,
+		"title": app_title,
+		"route": "/desk/sri-lanka-localisation",
+	}
+]
 
 # Includes in <head>
 # ------------------
