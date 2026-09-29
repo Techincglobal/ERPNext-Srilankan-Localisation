@@ -38,14 +38,16 @@ def execute():
 	for why), then drops the old doctype/return-scoped rows.
 	"""
 	for doctype in YEARSEQ_DOCTYPES:
-		table = f"tab{doctype}"
 		date_col = next((f for f in DATE_FIELDNAMES if frappe.db.has_column(doctype, f)), None)
 		if not date_col:
 			continue
 
-		rows = frappe.db.sql(
-			f"SELECT name, naming_series, `{date_col}` FROM `{table}` WHERE naming_series LIKE %s",  # noqa: S608
-			("%YEARSEQ%",),
+		DocTypeTable = frappe.qb.DocType(doctype)
+		rows = (
+			frappe.qb.from_(DocTypeTable)
+			.select(DocTypeTable.name, DocTypeTable.naming_series, getattr(DocTypeTable, date_col))
+			.where(DocTypeTable.naming_series.like("%YEARSEQ%"))
+			.run()
 		)
 
 		max_by_key = {}

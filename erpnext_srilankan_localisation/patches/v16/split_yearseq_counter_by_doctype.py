@@ -1,6 +1,7 @@
 import re
 
 import frappe
+from frappe.query_builder.functions import IfNull, Year
 from frappe.utils import cint
 
 # Doctypes wired up to use YEARSEQ in their naming series. Extend this list if
@@ -34,21 +35,21 @@ def execute():
 		year = old_name.split("-")[1]
 
 		for doctype in YEARSEQ_DOCTYPES:
-			table = f"tab{doctype}"
 			has_is_return = frappe.db.has_column(doctype, "is_return")
 
 			return_variants = [(1, "-RET"), (0, "")] if has_is_return else [(0, "")]
 			for is_return, suffix in return_variants:
-				conditions = ["naming_series LIKE %s", "YEAR(posting_date) = %s"]
-				values = ["%YEARSEQ%", year]
-				if has_is_return:
-					conditions.append("IFNULL(is_return, 0) = %s")
-					values.append(is_return)
-
-				rows = frappe.db.sql(
-					f"SELECT name FROM `{table}` WHERE {' AND '.join(conditions)}",  # noqa: S608
-					tuple(values),
+				DocTypeTable = frappe.qb.DocType(doctype)
+				query = (
+					frappe.qb.from_(DocTypeTable)
+					.select(DocTypeTable.name)
+					.where(DocTypeTable.naming_series.like("%YEARSEQ%"))
+					.where(Year(DocTypeTable.posting_date) == year)
 				)
+				if has_is_return:
+					query = query.where(IfNull(DocTypeTable.is_return, 0) == is_return)
+
+				rows = query.run()
 
 				max_seq = 0
 				for (doc_name,) in rows:
