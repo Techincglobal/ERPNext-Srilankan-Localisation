@@ -52,6 +52,13 @@ bench --site <your-site> install-app erpnext_srilankan_localisation
 | [Currency & Rounding](docs/configuration/04-currency-rounding.md) | Rounded totals and company round-off configuration |
 | [WHT Categories](docs/configuration/05-wht-categories.md) | Withholding Tax categories and invoice usage |
 
+### Policies
+
+| Policy | Description |
+|---|---|
+| [Privacy Policy](docs/privacy-policy.md) | Data handled by the app and privacy responsibilities |
+| [Terms of Use](docs/terms-of-use.md) | License, use, and limitations |
+
 ---
 
 ## Contributing
