@@ -1,6 +1,9 @@
 import frappe
 
-from erpnext_srilankan_localisation.setup.tax_templates import create_sri_lanka_tax_setup, sync_sscl_sales_templates
+from erpnext_srilankan_localisation.setup.tax_templates import (
+	create_sri_lanka_tax_setup,
+	sync_sscl_sales_templates,
+)
 from erpnext_srilankan_localisation.setup.wht_categories import create_wht_categories
 
 

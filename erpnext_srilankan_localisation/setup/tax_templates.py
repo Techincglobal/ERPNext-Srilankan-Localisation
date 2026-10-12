@@ -30,7 +30,9 @@ def remove_erpnext_default_setup(company: str):
 	Templates are deleted first because they reference the VAT account.
 	"""
 	for doctype in ("Sales Taxes and Charges Template", "Purchase Taxes and Charges Template"):
-		for name in frappe.get_all(doctype, filters={"company": company, "title": "Sri Lanka Tax"}, pluck="name"):
+		for name in frappe.get_all(
+			doctype, filters={"company": company, "title": "Sri Lanka Tax"}, pluck="name"
+		):
 			frappe.delete_doc(doctype, name, ignore_permissions=True, force=True)
 
 	vat_account = frappe.db.get_value(

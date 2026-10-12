@@ -6,8 +6,18 @@ from frappe.model.naming import getseries
 from frappe.utils import cint, getdate, now_datetime
 
 MONTH_CODES = (
-	"JAN", "FEB", "MAR", "APR", "MAY", "JUN",
-	"JUL", "AUG", "SEP", "OCT", "NOV", "DEC",
+	"JAN",
+	"FEB",
+	"MAR",
+	"APR",
+	"MAY",
+	"JUN",
+	"JUL",
+	"AUG",
+	"SEP",
+	"OCT",
+	"NOV",
+	"DEC",
 )
 
 # Fieldnames ERPNext uses for a document's transaction date, checked in order.
@@ -27,7 +37,6 @@ def _get_reference_date(doc):
 			if value:
 				return getdate(value)
 	return now_datetime().date()
-
 
 
 # Date-variable tokens excluded when building the YEARSEQ counter key - these
@@ -55,8 +64,7 @@ def _yearseq_key(doc, naming_series, ref_date):
 
 	parts = naming_series.split(".")
 	scope_parts = [
-		p for p in parts
-		if p and p != "YEARSEQ" and not p.startswith("#") and p not in DATE_VARIABLE_TOKENS
+		p for p in parts if p and p != "YEARSEQ" and not p.startswith("#") and p not in DATE_VARIABLE_TOKENS
 	]
 	scope = parse_naming_series(".".join(scope_parts), doc=doc) if scope_parts else ""
 

@@ -16,9 +16,13 @@ function lk_append_naming_series_help(frm) {
 			<b>${__("Sri Lanka Localisation attributes")}</b>
 			<ul>
 				<li><code>.TYY.</code> - ${__("Year in 2 digits, from the document's own transaction date")}</li>
-				<li><code>.MMM.</code> - ${__("Month abbreviation (JAN-DEC), from the document's own transaction date")}</li>
+				<li><code>.MMM.</code> - ${__(
+					"Month abbreviation (JAN-DEC), from the document's own transaction date"
+				)}</li>
 				<li><code>.TYYYY.</code> - ${__("Year in 4 digits, from the document's own transaction date")}</li>
-				<li><code>YEARSEQ</code> - ${__("Gapless annual sequence number that resets every year - available on Sales Invoice and Purchase Invoice, for Sri Lankan tax invoice numbering")}</li>
+				<li><code>YEARSEQ</code> - ${__(
+					"Gapless annual sequence number that resets every year - available on Sales Invoice and Purchase Invoice, for Sri Lankan tax invoice numbering"
+				)}</li>
 			</ul>
 			${__(
 				"You can add more than one YEARSEQ-based series for the same doctype (e.g. a separate series for credit/debit notes, or per company) - each gets its own independent counter, scoped by whatever text in the series comes before YEARSEQ."
@@ -72,11 +76,11 @@ function lk_append_series_counter_help(frm) {
 			)}</b></p>
 			<ul>
 				<li>${__("one that looks like")} <code>26OCT-YEARSEQ</code> - ${__(
-					"this is only a preview Frappe generates from the naming series template - it resolves TYY/MMM but doesn't recognise YEARSEQ, so it leaves it as literal text. It does not correspond to any real counter."
-				)}</li>
+		"this is only a preview Frappe generates from the naming series template - it resolves TYY/MMM but doesn't recognise YEARSEQ, so it leaves it as literal text. It does not correspond to any real counter."
+	)}</li>
 				<li>${__("one that looks like")} <code>YEARSEQ-Sales Invoice-2026</code> - ${__(
-					"this is the real counter that actually drives the next number. Always update this one, not the other."
-				)}</li>
+		"this is the real counter that actually drives the next number. Always update this one, not the other."
+	)}</li>
 			</ul>
 		</div>
 	`).insertBefore(field.$wrapper);

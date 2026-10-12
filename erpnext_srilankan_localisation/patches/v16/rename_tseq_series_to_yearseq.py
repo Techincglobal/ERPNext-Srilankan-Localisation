@@ -7,7 +7,7 @@ def execute():
 
 	The annual invoice-numbering marker was renamed from TSEQ to YEARSEQ.
 	Without this:
-	
+
 	- Any site that already has a TSEQ-{year} counter would silently start a
 	  fresh YEARSEQ-{year} counter at 1, colliding with invoice names already
 	  issued under the old counter.

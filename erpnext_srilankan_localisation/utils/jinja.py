@@ -43,10 +43,7 @@ def get_contact_number_from_contact(contact):
 	)
 
 	contact_full_name = (
-		frappe.qb.from_(Contact)
-		.select(Contact.full_name)
-		.where(Contact.name == contact)
-		.run(as_dict=True)
+		frappe.qb.from_(Contact).select(Contact.full_name).where(Contact.name == contact).run(as_dict=True)
 	)
 
 	return {

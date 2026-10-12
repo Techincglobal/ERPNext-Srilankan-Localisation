@@ -53,9 +53,7 @@ def create_wht_categories():
 	sl_companies = frappe.get_all("Company", filters={"country": "Sri Lanka"}, pluck="name")
 
 	wht_accounts = {
-		company: frappe.db.get_value(
-			"Account", {"account_name": "WHT Payable", "company": company}, "name"
-		)
+		company: frappe.db.get_value("Account", {"account_name": "WHT Payable", "company": company}, "name")
 		for company in sl_companies
 	}
 	wht_accounts = {company: account for company, account in wht_accounts.items() if account}

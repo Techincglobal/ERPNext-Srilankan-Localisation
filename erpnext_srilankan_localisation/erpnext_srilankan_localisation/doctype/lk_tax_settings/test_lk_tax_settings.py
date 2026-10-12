@@ -16,7 +16,6 @@ IGNORE_TEST_RECORD_DEPENDENCIES = []
 
 
 class IntegrationTestLKTaxSettings(IntegrationTestCase):
-
 	def setUp(self):
 		self.settings = frappe.get_single("LK Tax Settings")
 		self._original_enforce = self.settings.enforce_tin_validation

@@ -15,8 +15,7 @@ DATE_VARIABLE_TOKENS = {"YY", "MM", "DD", "YYYY", "JJJ", "WW", "timestamp", "TYY
 def _new_key(doctype, naming_series, year, doc):
 	parts = naming_series.split(".")
 	scope_parts = [
-		p for p in parts
-		if p and p != "YEARSEQ" and not p.startswith("#") and p not in DATE_VARIABLE_TOKENS
+		p for p in parts if p and p != "YEARSEQ" and not p.startswith("#") and p not in DATE_VARIABLE_TOKENS
 	]
 	scope = parse_naming_series(".".join(scope_parts), doc=doc) if scope_parts else ""
 	key = f"YEARSEQ-{doctype}"
@@ -69,9 +68,7 @@ def execute():
 				if existing[0][0] < max_seq:
 					frappe.db.sql("UPDATE `tabSeries` SET current = %s WHERE name = %s", (max_seq, key))
 			else:
-				frappe.db.sql(
-					"INSERT INTO `tabSeries` (name, current) VALUES (%s, %s)", (key, max_seq)
-				)
+				frappe.db.sql("INSERT INTO `tabSeries` (name, current) VALUES (%s, %s)", (key, max_seq))
 
 	# Drop the now-obsolete doctype/return-scoped rows from the previous scheme.
 	frappe.db.sql(
