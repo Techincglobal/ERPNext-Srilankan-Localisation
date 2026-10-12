@@ -5,10 +5,6 @@
 //
 // Loaded globally (app_include_js) rather than scoped via doctype_js:
 // this doctype's own __js bundle isn't reliably evaluated on first visit
-// to the page (its load path differs from a normal form), so a per-page
-// poll here is what actually works - lk_append_naming_series_help is
-// idempotent (checks for its own marker class), so repeated calls and
-// running on every desk page are both harmless.
 function lk_append_naming_series_help(frm) {
 	const field = frm.get_field("help_html");
 	if (!field || field.$wrapper.find(".lk-naming-series-help").length) {
@@ -29,6 +25,26 @@ function lk_append_naming_series_help(frm) {
 			)}
 		</div>
 	`);
+}
+
+// Frappe's own transaction_type handler (document_naming_settings.js core)
+// re-fetches naming_series_options asynchronously, and once that resolves,
+// re-renders this section - including the help_html field, which resets it
+// back to just its static options and wipes anything appended to it. A
+// MutationObserver reacts to that the instant it happens, however long the
+// request actually takes, rather than guessing at a delay.
+function lk_keep_naming_series_help_alive(frm) {
+	const field = frm.get_field("help_html");
+	if (!field || field.$wrapper.data("lkHelpObserverAttached")) {
+		return;
+	}
+	field.$wrapper.data("lkHelpObserverAttached", true);
+
+	new MutationObserver(() => {
+		if (!field.$wrapper.find(".lk-naming-series-help").length) {
+			lk_append_naming_series_help(frm);
+		}
+	}).observe(field.$wrapper[0], { childList: true });
 }
 
 // "Update Series Counter" has no help field of its own to append to (just
@@ -66,13 +82,15 @@ function lk_append_series_counter_help(frm) {
 	`).insertBefore(field.$wrapper);
 }
 
-(function poll_for_naming_settings_form(attempts_left) {
-	if (attempts_left <= 0) {
-		return;
-	}
-	if (typeof cur_frm !== "undefined" && cur_frm && cur_frm.doctype === "Document Naming Settings") {
-		lk_append_naming_series_help(cur_frm);
-		lk_append_series_counter_help(cur_frm);
-	}
-	setTimeout(() => poll_for_naming_settings_form(attempts_left - 1), 300);
-})(100);
+frappe.ui.form.on("Document Naming Settings", {
+	onload_post_render(frm) {
+		lk_append_naming_series_help(frm);
+		lk_append_series_counter_help(frm);
+		lk_keep_naming_series_help_alive(frm);
+	},
+	refresh(frm) {
+		lk_append_naming_series_help(frm);
+		lk_append_series_counter_help(frm);
+		lk_keep_naming_series_help_alive(frm);
+	},
+});
