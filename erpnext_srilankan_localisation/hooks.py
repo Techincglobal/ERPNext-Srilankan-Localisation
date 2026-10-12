@@ -39,7 +39,7 @@ add_to_apps_screen = [
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/erpnext_srilankan_localisation/css/erpnext_srilankan_localisation.css"
-# app_include_js = "/assets/erpnext_srilankan_localisation/js/erpnext_srilankan_localisation.js"
+app_include_js = "/assets/erpnext_srilankan_localisation/js/naming_series_help.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/erpnext_srilankan_localisation/css/erpnext_srilankan_localisation.css"
@@ -154,11 +154,6 @@ setup_wizard_complete = "erpnext_srilankan_localisation.install.after_setup_wiza
 # Hook on document methods and events
 
 doc_events = {
-	"*": {
-		"autoname": "erpnext_srilankan_localisation.utils.naming.autoname_with_annual_sequence",
-		"validate": "erpnext_srilankan_localisation.utils.naming.validate_posting_date_locked",
-		"on_trash": "erpnext_srilankan_localisation.utils.naming.revert_annual_sequence_on_delete",
-	},
 	"Company": {
 		"on_update": "erpnext_srilankan_localisation.overrides.company.on_update",
 	},
