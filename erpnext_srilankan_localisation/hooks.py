@@ -163,7 +163,15 @@ doc_events = {
 		"on_update": "erpnext_srilankan_localisation.overrides.company.on_update",
 	},
 	"Sales Invoice": {
+		"autoname": "erpnext_srilankan_localisation.utils.naming.autoname_with_annual_sequence",
+		"validate": "erpnext_srilankan_localisation.utils.naming.validate_posting_date_locked",
+		"on_trash": "erpnext_srilankan_localisation.utils.naming.revert_annual_sequence_on_delete",
 		"before_submit": "erpnext_srilankan_localisation.overrides.validations.validate_sales_invoice",
+	},
+	"Purchase Invoice": {
+		"autoname": "erpnext_srilankan_localisation.utils.naming.autoname_with_annual_sequence",
+		"validate": "erpnext_srilankan_localisation.utils.naming.validate_posting_date_locked",
+		"on_trash": "erpnext_srilankan_localisation.utils.naming.revert_annual_sequence_on_delete",
 	},
 }
 
