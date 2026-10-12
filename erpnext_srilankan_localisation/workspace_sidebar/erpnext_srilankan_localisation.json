@@ -3,7 +3,7 @@
  "creation": "2026-09-29 10:00:00.000000",
  "docstatus": 0,
  "doctype": "Workspace Sidebar",
- "for_user": "",
+ "for_user": null,
  "header_icon": "file-text",
  "idx": 0,
  "items": [
@@ -167,8 +167,8 @@
  "modified": "2026-09-29 10:00:00.000000",
  "modified_by": "Administrator",
  "module": "Erpnext Srilankan Localisation",
- "name": "Sri Lanka Localisation",
+ "name": "Erpnext Srilankan Localisation",
  "owner": "Administrator",
  "standard": 1,
- "title": "Sri Lanka Localisation"
+ "title": "Erpnext Srilankan Localisation"
 }

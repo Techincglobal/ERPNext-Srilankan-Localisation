@@ -1,8 +1,8 @@
 {
  "app": "erpnext_srilankan_localisation",
  "charts": [],
- "content": "[{\"id\": \"slHdr00001\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Sri Lanka Localisation</b></span>\", \"col\": 12}}, {\"id\": \"slSc000001\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"LK Tax Settings\", \"col\": 3}}, {\"id\": \"slSc000002\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"VAT Output Schedule\", \"col\": 3}}, {\"id\": \"slSc000003\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"VAT Input Schedule\", \"col\": 3}}, {\"id\": \"slSc000004\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Tax Rule\", \"col\": 3}}, {\"id\": \"slSpc00001\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"slHdr00002\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>Reports &amp; Masters</b></span>\", \"col\": 12}}, {\"id\": \"slCd000001\", \"type\": \"card\", \"data\": {\"card_name\": \"VAT Reports\", \"col\": 4}}, {\"id\": \"slCd000002\", \"type\": \"card\", \"data\": {\"card_name\": \"Tax Setup\", \"col\": 4}}, {\"id\": \"slCd000003\", \"type\": \"card\", \"data\": {\"card_name\": \"Withholding Tax\", \"col\": 4}}, {\"id\": \"slCd000004\", \"type\": \"card\", \"data\": {\"card_name\": \"Masters\", \"col\": 4}}]",
- "creation": "2026-09-29 10:00:00.000000",
+ "content": "[{\"id\":\"slHdr00001\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Sri Lanka Localisation</b></span>\",\"col\":12}},{\"id\":\"slSc000001\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"LK Tax Settings\",\"col\":4}},{\"id\":\"slSc000002\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"VAT Output Schedule\",\"col\":4}},{\"id\":\"slSc000003\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"VAT Input Schedule\",\"col\":4}},{\"id\":\"slSpc00001\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"slHdr00002\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports &amp; Masters</b></span>\",\"col\":12}},{\"id\":\"slCd000001\",\"type\":\"card\",\"data\":{\"card_name\":\"VAT Reports\",\"col\":4}},{\"id\":\"slCd000002\",\"type\":\"card\",\"data\":{\"card_name\":\"Tax Setup\",\"col\":4}},{\"id\":\"slCd000003\",\"type\":\"card\",\"data\":{\"card_name\":\"Withholding Tax\",\"col\":4}},{\"id\":\"slCd000004\",\"type\":\"card\",\"data\":{\"card_name\":\"Masters\",\"col\":4}}]",
+ "creation": "2026-09-29 10:00:00",
  "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
@@ -184,7 +184,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-09-29 10:00:00.000000",
+ "modified": "2026-10-12 11:54:50.405723",
  "modified_by": "Administrator",
  "module": "Erpnext Srilankan Localisation",
  "name": "Sri Lanka Localisation",
@@ -209,6 +209,7 @@
    "doc_view": "",
    "label": "VAT Output Schedule",
    "link_to": "VAT Output Schedule",
+   "report_ref_doctype": "Sales Invoice",
    "type": "Report"
   },
   {
@@ -216,14 +217,8 @@
    "doc_view": "",
    "label": "VAT Input Schedule",
    "link_to": "VAT Input Schedule",
+   "report_ref_doctype": "Purchase Invoice",
    "type": "Report"
-  },
-  {
-   "color": "Grey",
-   "doc_view": "List",
-   "label": "Tax Rule",
-   "link_to": "Tax Rule",
-   "type": "DocType"
   }
  ],
  "title": "Sri Lanka Localisation",
